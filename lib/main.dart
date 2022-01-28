@@ -9,6 +9,7 @@ import 'pages/partner_signup_page2.dart';
 import 'pages/partner_signup_page3.dart';
 import 'pages/signup_page.dart';
 import 'pages/partner_signup_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
   //WidgetsFlutterBinding.ensureInitialized(); // Flutter 비동기 실행을 위한 코드
@@ -24,8 +25,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Chimap-Actual',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('ko', 'KR'),
+      ],
       theme: new ThemeData(
-        primarySwatch: createMaterialColor(Color(0xFFFD7C41)),
+        primarySwatch: createMaterialColor(Color(0xFFFFBD9D)),
       ),
       initialRoute: '/first',
       getPages: [
