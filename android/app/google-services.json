@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1057687617499",
+    "project_id": "chimap-start",
+    "storage_bucket": "chimap-start.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057687617499:android:89ac23140013b4e18df1fe",
+        "android_client_info": {
+          "package_name": "com.example.chimap_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057687617499-76sengcmk8di865spd40trp8qnr8pg8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOKsp8hD_kRhA-1GY-WesH4GiUPFhOxBc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057687617499-76sengcmk8di865spd40trp8qnr8pg8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
