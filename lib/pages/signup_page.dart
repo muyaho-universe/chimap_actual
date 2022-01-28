@@ -99,7 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                                 TextButton(
                                   onPressed: (){
-                                    Get.toNamed("/first/login/signup/partner1");
+                                    Get.offNamed("/first/login/signup/partner1");
                                   },
                                   child: Text('예'),
                                 ),

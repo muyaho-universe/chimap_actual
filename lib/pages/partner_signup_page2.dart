@@ -227,7 +227,7 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Get.toNamed("/first/login/signup/partner3");
+                                  Get.offNamed("/first/login/signup/partner3");
                                 },
                                 child: Text('예'),
                               ),
