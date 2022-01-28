@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:multi_masked_formatter/multi_masked_formatter.dart';
 
 class PartnerSignUpPage3 extends StatelessWidget {
   PartnerSignUpPage3({Key? key}) : super(key: key);
@@ -63,8 +64,14 @@ class PartnerSignUpPage3 extends StatelessWidget {
                     width: 300,
                     height: 60,
                     child: TextFormField(
+                      inputFormatters: [
+                        MultiMaskedTextInputFormatter(
+                            masks: ['xxx-xxxx-xxxx', 'xxx-xxx-xxxx'],
+                            separator: '-')
+                      ],
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        hintText: '010-0000-0000',
+                        hintText: '-를 빼고 번호만 입력해주세요.',
                       ),
                     ),
                   ),
@@ -115,8 +122,7 @@ class PartnerSignUpPage3 extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     primary: Color(0xFFFFBD9D),
                   ),
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   child: const Text(
                     '다음',
                     style: TextStyle(
@@ -134,4 +140,3 @@ class PartnerSignUpPage3 extends StatelessWidget {
     );
   }
 }
-
