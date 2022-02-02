@@ -5,12 +5,14 @@ class UserModel {
   String? userName;
   String? phoneNumber;
   String? userType;
+  DateTime? userDate;
 
   UserModel({
     this.uid,
     this.userName,
     this.phoneNumber,
     this.userType,
+    this.userDate,
   });
 
   UserModel.fromMap(Map<String, dynamic> map)
@@ -19,9 +21,11 @@ class UserModel {
         userName = map['userName'],
         phoneNumber = map['phoneNumber'];
 
+
   UserModel.fromSnapshot(DocumentSnapshot snapshot)
       : userType = snapshot['userType'],
         uid = snapshot['uid'],
         userName = snapshot['userName'],
         phoneNumber = snapshot['phoneNumber'];
+
 }

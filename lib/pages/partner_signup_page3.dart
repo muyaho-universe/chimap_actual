@@ -122,7 +122,9 @@ class PartnerSignUpPage3 extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     primary: Color(0xFFFFBD9D),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offNamed("/first/login/signup/infoConfirm");
+                  },
                   child: const Text(
                     '다음',
                     style: TextStyle(

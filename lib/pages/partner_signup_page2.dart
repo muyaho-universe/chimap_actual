@@ -13,6 +13,7 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
   final _signUpFormKey = GlobalKey<FormState>();
 
   DateTime _selectedDate = DateTime.now();
+  var _userName = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -122,12 +123,6 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
                         initialDate: DateTime.now(),
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
-                        // builder: (BuildContext context, Widget child){
-                        //   return Theme(
-                        //       data: ThemeData.light(),
-                        //       child: child
-                        //   );
-                        // }
                       );
 
                       future.then((date) {

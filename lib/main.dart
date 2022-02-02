@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'pages/first_page.dart';
 import 'pages/found_account_page.dart';
+import 'pages/information_confirm_page.dart';
 import 'pages/login_page.dart';
 import 'pages/partner_signup_page2.dart';
 import 'pages/partner_signup_page3.dart';
@@ -68,6 +69,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/first/login/accountfound',
           page: () => FoundPageSelectPage(),
+        ),
+        GetPage(
+          name: '/first/login/signup/infoConfirm',
+          page: () => informationConfirmPage(),
         ),
         // GetPage(
         //   name: '/login/partner',
