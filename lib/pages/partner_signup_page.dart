@@ -20,6 +20,7 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
 
   String? InputUserName;
   UserModel userModel = UserModel();
+  var type = Get.arguments;
 
   final TextEditingController _signUpUserNameController = TextEditingController();
 
@@ -31,7 +32,7 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('보호자 회원가입'),
+          title: Text('회원가입'),
           backgroundColor: const Color(0xFFFFCAB0),
         ),
         //backgroundColor: Colors.white,
@@ -175,7 +176,7 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Get.offNamed("/first/login/signup/partner2");
+                                  Get.offNamed("/first/login/signup/partner2", arguments: type);
                                 },
                                 child: Text('예'),
                               ),

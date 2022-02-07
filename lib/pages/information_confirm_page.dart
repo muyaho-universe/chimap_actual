@@ -14,6 +14,7 @@ class _informationConfirmPageState extends State<informationConfirmPage> {
   String _birthDate = '1998.04.10';
   String _phoneNumber = '010-4208-2214';
   late UserModel userModel;
+  var type = Get.arguments;
 
   @override
 
@@ -25,7 +26,7 @@ class _informationConfirmPageState extends State<informationConfirmPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('보호자 회원가입'),
+          title: Text('회원가입'),
           backgroundColor: const Color(0xFFFFCAB0),
         ),
         //backgroundColor: Colors.white,
@@ -116,7 +117,7 @@ class _informationConfirmPageState extends State<informationConfirmPage> {
                     primary: Color(0xFFFFBD9D),
                   ),
                   onPressed: () {
-                    Get.offNamed("/first/login/signup/numberAuth");
+                    Get.offNamed("/first/login/signup/numberAuth", arguments: type);
                   },
                   child: const Text(
                     '다음',

@@ -19,6 +19,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
   final TextEditingController _signUpPWController = TextEditingController();
   final TextEditingController _signUpPWConfirmController =
       TextEditingController();
+  var type = Get.arguments;
 
   List<bool> _selections1 = List.generate(2, (index) => false);
 
@@ -288,7 +289,13 @@ class _IDandPWPageState extends State<IDandPWPage> {
                           primary: Color(0xFFFFBD9D),
                         ),
                         onPressed: () {
-                          Get.offNamed("/first/login/signup/complete");
+                          if(type == 1){
+                            Get.offNamed('/first/signup');
+                          }
+                          else {
+                            Get.offNamed("/first/login/signup/complete");
+                          }
+
                         },
                         child: const Text(
                           '다음',

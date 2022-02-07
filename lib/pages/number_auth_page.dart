@@ -14,6 +14,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
   final _AuthFormKey = GlobalKey<FormState>();
   final userController = Get.put(UserController());
   final SmsAutoFill _autoFill = SmsAutoFill();
+  var type = Get.arguments;
 
   String _number = '010-4208-2214';
 
@@ -27,7 +28,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('보호자 회원가입'),
+          title: Text('회원가입'),
           backgroundColor: const Color(0xFFFFCAB0),
         ),
         //backgroundColor: Colors.white,
@@ -170,7 +171,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
                 OutlinedButton(
                   onPressed: () async {
                     // verifyPhoneNumber();
-                    Get.offNamed("first/login/signup/IDandPW");
+                    Get.offNamed("first/login/signup/IDandPW", arguments: type);
                   },
                   child: Text('인증하기'),
                 ),

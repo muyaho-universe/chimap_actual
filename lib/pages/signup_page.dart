@@ -11,7 +11,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  late int type;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -99,7 +99,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                                 TextButton(
                                   onPressed: (){
-                                    Get.offNamed("/first/login/signup/partner1");
+                                    type = 1;
+                                    Get.toNamed("/first/login/signup/partner1", arguments: type);
                                   },
                                   child: Text('예'),
                                 ),
@@ -180,7 +181,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                                 TextButton(
                                   onPressed: (){
-                                    Get.toNamed("/first/login/signup/partner1");
+                                    type = 2;
+                                    Get.toNamed("/first/login/signup/partner1", arguments: type);
                                   },
                                   child: Text('예'),
                                 ),
@@ -261,7 +263,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                                 TextButton(
                                   onPressed: (){
-                                    Get.toNamed("/first/login/signup/partner1");
+                                    type = 3;
+                                    Get.toNamed("/first/login/signup/partner1", arguments: type);
                                   },
                                   child: Text('예'),
                                 ),

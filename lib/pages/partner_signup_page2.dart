@@ -13,7 +13,7 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
   final _signUpFormKey = GlobalKey<FormState>();
 
   DateTime _selectedDate = DateTime.now();
-  var _userName = Get.arguments;
+  var type = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('보호자 회원가입'),
+          title: Text('회원가입'),
           backgroundColor: const Color(0xFFFFCAB0),
         ),
         //backgroundColor: Colors.white,
@@ -222,7 +222,7 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Get.offNamed("/first/login/signup/partner3");
+                                  Get.offNamed("/first/login/signup/partner3", arguments: type);
                                 },
                                 child: Text('예'),
                               ),

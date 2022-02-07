@@ -7,6 +7,7 @@ class PartnerSignUpPage3 extends StatelessWidget {
   PartnerSignUpPage3({Key? key}) : super(key: key);
 
   final _signUpFormKey = GlobalKey<FormState>();
+  var type = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class PartnerSignUpPage3 extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('보호자 회원가입'),
+          title: Text('회원가입'),
           backgroundColor: const Color(0xFFFFCAB0),
         ),
         //backgroundColor: Colors.white,
@@ -123,7 +124,7 @@ class PartnerSignUpPage3 extends StatelessWidget {
                     primary: Color(0xFFFFBD9D),
                   ),
                   onPressed: () {
-                    Get.offNamed("/first/login/signup/infoConfirm");
+                    Get.offNamed("/first/login/signup/infoConfirm", arguments: type);
                   },
                   child: const Text(
                     '다음',
