@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'pages/IDandPW_page.dart';
+import 'pages/complete_page.dart';
 import 'pages/first_page.dart';
 import 'pages/found_account_page.dart';
 import 'pages/information_confirm_page.dart';
@@ -84,14 +85,10 @@ class MyApp extends StatelessWidget {
           name: '/first/login/signup/IDandPW',
           page: () => IDandPWPage(),
         ),
-        // GetPage(
-        //   name: '/login/partner',
-        //   page: () => PartnerPage(),
-        // ),
-        // GetPage(
-        //   name: '/login/patient',
-        //   page: () => PatientPage(),
-        // ),
+        GetPage(
+          name: '/first/login/signup/complete',
+          page: () => CompletePage(),
+        ),
       ],
     );
   }

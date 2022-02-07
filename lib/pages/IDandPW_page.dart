@@ -214,7 +214,9 @@ class _IDandPWPageState extends State<IDandPWPage> {
                           borderRadius: BorderRadius.circular(10)),
                       primary: Color(0xFFFFBD9D),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.offNamed("/first/login/signup/complete");
+                    },
                     child: const Text(
                       '다음',
                       style: TextStyle(
