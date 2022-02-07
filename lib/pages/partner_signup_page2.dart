@@ -72,13 +72,13 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: 150,
+                        width: 170,
                         height: 60,
                         child: Text(
                           '${DateFormat('yyyy').format(_selectedDate)}.${_selectedDate.month}.${_selectedDate.day}',
                           style: TextStyle(
                             fontFamily: "Gosan",
-                            fontSize: 28.0,
+                            fontSize: 30.0,
                             color: Colors.black87,
                           ),
                         ),

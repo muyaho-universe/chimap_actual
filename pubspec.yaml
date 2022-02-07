@@ -43,6 +43,7 @@ dependencies:
   firebase_core: ^1.11.0
   syncfusion_flutter_datepicker: ^18.4.31-beta
   multi_masked_formatter: ^0.1.0
+  sms_autofill: ^2.2.0
 
 dev_dependencies:
   flutter_test:

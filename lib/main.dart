@@ -1,7 +1,9 @@
+import 'package:chimap_actual/pages/number_auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'pages/IDandPW_page.dart';
 import 'pages/first_page.dart';
 import 'pages/found_account_page.dart';
 import 'pages/information_confirm_page.dart';
@@ -73,6 +75,14 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/first/login/signup/infoConfirm',
           page: () => informationConfirmPage(),
+        ),
+        GetPage(
+          name: '/first/login/signup/numberAuth',
+          page: () => NumberAuthPage(),
+        ),
+        GetPage(
+          name: '/first/login/signup/IDandPW',
+          page: () => IDandPWPage(),
         ),
         // GetPage(
         //   name: '/login/partner',

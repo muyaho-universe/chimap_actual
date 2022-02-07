@@ -1,5 +1,6 @@
 import 'package:chimap_actual/utils/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class informationConfirmPage extends StatefulWidget {
   informationConfirmPage({Key? key}) : super(key: key);
@@ -70,6 +71,64 @@ class _informationConfirmPageState extends State<informationConfirmPage> {
               fontFamily: 'Gosan',
               fontSize: 24.0,
             ),
+          ),
+          SizedBox(height: 175.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: 131.0,
+                height: 31.0,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    primary: Color(0xFFC4C4C4),
+                  ),
+                  onPressed: () {
+                    Get.offNamed('/first/login/signup/partner2');
+                  },
+                  child: const Text(
+                    '이전',
+                    style: TextStyle(
+                      fontFamily: "Gosan",
+                      fontSize: 28.0,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                width: 131.0,
+                height: 31.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    primary: Color(0xFFFFBD9D),
+                  ),
+                  onPressed: () {
+                    Get.offNamed("/first/login/signup/numberAuth");
+                  },
+                  child: const Text(
+                    '다음',
+                    style: TextStyle(
+                      fontFamily: "Gosan",
+                      fontSize: 28.0,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
