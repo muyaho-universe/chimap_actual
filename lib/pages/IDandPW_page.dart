@@ -1,6 +1,8 @@
 import 'package:chimap_actual/utils/user_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kopo/kopo.dart';
 
 class IDandPWPage extends StatefulWidget {
   const IDandPWPage({Key? key}) : super(key: key);
@@ -17,6 +19,8 @@ class _IDandPWPageState extends State<IDandPWPage> {
   final TextEditingController _signUpPWController = TextEditingController();
   final TextEditingController _signUpPWConfirmController =
       TextEditingController();
+
+  List<bool> _selections1 = List.generate(2, (index) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -36,205 +40,276 @@ class _IDandPWPageState extends State<IDandPWPage> {
   }
 
   _bodyWidget() {
+    List<bool> isSelected = List.generate(2, (index) => false);
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 75,
-              ),
-              Text(
-                '로그인에 사용할 아이디와',
-                style: TextStyle(
-                  fontFamily: "Gosan",
-                  fontSize: 25.0,
-                  color: Colors.black87,
+      scrollDirection: Axis.vertical,
+      child: Form(
+        key: _IPsignUpFormKey,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 75,
                 ),
-              ),
-              Text(
-                '비밀번호를 적어주세요!',
-                style: TextStyle(
-                  fontFamily: "Gosan",
-                  fontSize: 25.0,
-                  color: Colors.black87,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                '무야호',
-                style: TextStyle(
-                  fontFamily: "Gosan",
-                  fontSize: 15.0,
-                  color: Colors.grey,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 38,
+                Text(
+                  '로그인에 사용할 아이디와',
+                  style: TextStyle(
+                    fontFamily: "Gosan",
+                    fontSize: 25.0,
+                    color: Colors.black87,
                   ),
-                  Text(
-                    '아이디:',
-                    style: TextStyle(
-                      fontFamily: "Gosan",
-                      fontSize: 20.0,
-                      color: Colors.black87,
+                ),
+                Text(
+                  '비밀번호를 적어주세요!',
+                  style: TextStyle(
+                    fontFamily: "Gosan",
+                    fontSize: 25.0,
+                    color: Colors.black87,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  '무야호',
+                  style: TextStyle(
+                    fontFamily: "Gosan",
+                    fontSize: 15.0,
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 38,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: 300,
-                height: 60,
-                child: TextFormField(
-                  controller: _signUpIDController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: '아이디를 입력해주세요.',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 38,
-                  ),
-                  Text(
-                    '비밀번호:',
-                    style: TextStyle(
-                      fontFamily: "Gosan",
-                      fontSize: 20.0,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: 300,
-                height: 60,
-                child: TextFormField(
-                  controller: _signUpPWController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: '비밀번호를 입력해주세요.',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 38,
-                  ),
-                  Text(
-                    '비밀번호 확인:',
-                    style: TextStyle(
-                      fontFamily: "Gosan",
-                      fontSize: 20.0,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: 300,
-                height: 60,
-                child: TextFormField(
-                  controller: _signUpPWController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: '비밀번호를 다시 한번 입력해주세요.',
-                  ),
-                ),
-              ),
-              SizedBox(height: 15,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: 131.0,
-                    height: 31.0,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        primary: Color(0xFFC4C4C4),
+                    Text(
+                      '아이디:',
+                      style: TextStyle(
+                        fontFamily: "Gosan",
+                        fontSize: 20.0,
+                        color: Colors.black87,
                       ),
-                      onPressed: () {
-                        Get.offNamed("/first/signup");
-                      },
-                      child: const Text(
-                        '처음으로',
-                        style: TextStyle(
-                          fontFamily: "Gosan",
-                          fontSize: 28.0,
-                          color: Colors.black87,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  width: 300,
+                  height: 60,
+                  child: TextFormField(
+                    controller: _signUpIDController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '아이디를 입력해주세요.',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 38,
+                    ),
+                    Text(
+                      '비밀번호:',
+                      style: TextStyle(
+                        fontFamily: "Gosan",
+                        fontSize: 20.0,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  width: 300,
+                  height: 60,
+                  child: TextFormField(
+                    controller: _signUpPWController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '비밀번호를 입력해주세요.',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 38,
+                    ),
+                    Text(
+                      '비밀번호 확인:',
+                      style: TextStyle(
+                        fontFamily: "Gosan",
+                        fontSize: 20.0,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  width: 300,
+                  height: 60,
+                  child: TextFormField(
+                    controller: _signUpPWConfirmController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '비밀번호를 다시 한번 입력해주세요.',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 38,
+                    ),
+                    Text(
+                      '성별',
+                      style: TextStyle(
+                        fontFamily: "Gosan",
+                        fontSize: 20.0,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                ToggleButtons(
+                    onPressed: (int index) {
+                      setState(() {
+                        _selections1[index] = !_selections1[index];
+                      });
+                    },
+                    children: <Widget>[
+                      Text('남자'),
+                      Text('여자'),
+                    ],
+                    isSelected: _selections1,
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 38,
+                    ),
+                    Text(
+                      '주소',
+                      style: TextStyle(
+                        fontFamily: "Gosan",
+                        fontSize: 20.0,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                ElevatedButton(
+                  child: Text('우편주소검색'),
+                  onPressed: () async {
+                    searchingAdress();
+                  },
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 131.0,
+                      height: 31.0,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          primary: Color(0xFFC4C4C4),
+                        ),
+                        onPressed: () {
+                          Get.offNamed("/first/signup");
+                        },
+                        child: const Text(
+                          '처음으로',
+                          style: TextStyle(
+                            fontFamily: "Gosan",
+                            fontSize: 28.0,
+                            color: Colors.black87,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    width: 131.0,
-                    height: 31.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
+                    SizedBox(
+                      width: 10,
                     ),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        primary: Color(0xFFFFBD9D),
+                    Container(
+                      width: 131.0,
+                      height: 31.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
                       ),
-                      onPressed: () {
-                        Get.offNamed("/first/login/signup/complete");
-                      },
-                      child: const Text(
-                        '다음',
-                        style: TextStyle(
-                          fontFamily: "Gosan",
-                          fontSize: 28.0,
-                          color: Colors.black87,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          primary: Color(0xFFFFBD9D),
+                        ),
+                        onPressed: () {
+                          Get.offNamed("/first/login/signup/complete");
+                        },
+                        child: const Text(
+                          '다음',
+                          style: TextStyle(
+                            fontFamily: "Gosan",
+                            fontSize: 28.0,
+                            color: Colors.black87,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+void searchingAdress() {
 }
