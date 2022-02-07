@@ -42,10 +42,18 @@ class CompletePage extends StatelessWidget {
                   width: 2.0,
                 )
               ),
-              child: Image.asset(
-                'asset/images/partner.png',
-                width: 90,
-                height: 90,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 10.0),
+                    Image.asset(
+                      'asset/images/check.png',
+                      width: 130,
+                      height: 130,
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 50,),
