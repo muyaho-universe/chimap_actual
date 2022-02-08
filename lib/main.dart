@@ -9,11 +9,15 @@ import 'pages/first_page.dart';
 import 'pages/found_account_page.dart';
 import 'pages/information_confirm_page.dart';
 import 'pages/login_page.dart';
+import 'pages/partner_only_page.dart';
 import 'pages/partner_signup_page2.dart';
 import 'pages/partner_signup_page3.dart';
 import 'pages/signup_page.dart';
 import 'pages/partner_signup_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:http/http.dart' as http;
+
+import 'repository/location_search.dart';
 
 Future<void> main() async {
   //WidgetsFlutterBinding.ensureInitialized(); // Flutter 비동기 실행을 위한 코드
@@ -88,6 +92,18 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/first/login/signup/complete',
           page: () => CompletePage(),
+        ),
+        GetPage(
+          name: '/first/search',
+          page: () => HttpApp(),
+        ),
+        GetPage(
+          name: '/first/login/signup/partnerOnly',
+          page: () => PartnerOnlyPage(),
+        ),
+        GetPage(
+          name: '/first/login/findingID',
+          page: () => PartnerOnlyPage(),
         ),
       ],
     );

@@ -290,7 +290,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                         ),
                         onPressed: () {
                           if(type == 1){
-                            Get.offNamed('/first/signup');
+                            Get.offNamed('/first/login/signup/partnerOnly');
                           }
                           else {
                             Get.offNamed("/first/login/signup/complete");

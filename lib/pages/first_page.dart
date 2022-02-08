@@ -105,6 +105,32 @@ class FirstPage extends StatelessWidget {
             ),
           ),
         ),
+        Container(
+          width: 50.0,
+          height: 71.0,
+          child: ElevatedButton(
+            style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.black),
+                  ),
+                ),
+                backgroundColor:
+                MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.9))),
+            onPressed: () {
+              Get.toNamed('/first/search');
+            },
+            child: const Text(
+              'sss',
+              style: TextStyle(
+                fontFamily: "Gosan",
+                fontSize: 15.0,
+                color: Colors.black87,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
