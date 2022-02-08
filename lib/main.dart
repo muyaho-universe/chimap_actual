@@ -7,6 +7,7 @@ import 'pages/ID_finding_page.dart';
 import 'pages/IDandPW_page.dart';
 import 'pages/PW_finding_page.dart';
 import 'pages/complete_page.dart';
+import 'pages/finding_ID_info_page.dart';
 import 'pages/first_page.dart';
 import 'pages/found_account_page.dart';
 import 'pages/information_confirm_page.dart';
@@ -14,6 +15,8 @@ import 'pages/login_page.dart';
 import 'pages/partner_only_page.dart';
 import 'pages/partner_signup_page2.dart';
 import 'pages/partner_signup_page3.dart';
+import 'pages/reset_complete_page.dart';
+import 'pages/reset_pw_page.dart';
 import 'pages/signup_page.dart';
 import 'pages/partner_signup_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -110,6 +113,18 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/first/login/findingPW',
           page: () => PWFindingPage(),
+        ),
+        GetPage(
+          name: '/first/login/findingIDinfo',
+          page: () => findingIDInfoPage(),
+        ),
+        GetPage(
+          name: '/first/login/resetPW',
+          page: () => ResetPWPage(),
+        ),
+        GetPage(
+          name: '/first/login/compresetPW',
+          page: () => PWResetCompletePage(),
         ),
       ],
     );

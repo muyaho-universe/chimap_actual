@@ -28,7 +28,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('회원가입'),
+          title: Text('본인인증'),
           backgroundColor: const Color(0xFFFFCAB0),
         ),
         //backgroundColor: Colors.white,
@@ -170,8 +170,13 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    // verifyPhoneNumber();
-                    Get.offNamed("first/login/signup/IDandPW", arguments: type);
+                    if (type == 100) {
+                      Get.offNamed("/first/login/findingIDinfo");
+                    } else if (type == 101) {
+                      Get.offNamed("/first/login/resetPW");
+                    } else
+                      Get.offNamed("first/login/signup/IDandPW",
+                          arguments: type);
                   },
                   child: Text('인증하기'),
                 ),

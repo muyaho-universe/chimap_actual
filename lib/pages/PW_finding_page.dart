@@ -13,6 +13,7 @@ class PWFindingPage extends StatefulWidget {
 
 class _IDFindingPageState extends State<PWFindingPage> {
   DateTime _selectedDate = DateTime.now();
+  var foundID = Get.arguments;
 
   final _IDfindingFormKey = GlobalKey<FormState>();
   final userController = Get.put(UserController());
@@ -25,6 +26,8 @@ class _IDFindingPageState extends State<PWFindingPage> {
   late String _name = _findingNameController.text;
   late String _num = _findingNumberController.text;
   late String _ID = _findingIDController.text;
+  var type = 101;
+
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +152,7 @@ class _IDFindingPageState extends State<PWFindingPage> {
                       width: 38,
                     ),
                     Text(
-                      '생년월일:',
+                      '전화번호:',
                       style: TextStyle(
                         fontFamily: "Gosan",
                         fontSize: 20.0,
@@ -161,16 +164,58 @@ class _IDFindingPageState extends State<PWFindingPage> {
                 SizedBox(
                   height: 5,
                 ),
+
+                Container(
+                  width: 300,
+                  height: 60,
+                  child: TextFormField(
+                    controller: _findingNumberController,
+                    inputFormatters: [
+                      MultiMaskedTextInputFormatter(
+                          masks: ['xxx-xxxx-xxxx', 'xxx-xxx-xxxx'],
+                          separator: '-')
+                    ],
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '찾고자 하는 사람의 번호를 적어주세요.',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 38,
+                    ),
+                    Text(
+                      '생년월일:',
+                      style: TextStyle(
+                        fontFamily: "Gosan",
+                        fontSize: 20.0,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
                 Container(
                   width: 150,
                   height: 30,
-                  child: Text(
-                    '${DateFormat('yyyy').format(_selectedDate)}.${_selectedDate.month}.${_selectedDate.day}',
-                    style: TextStyle(
-                      fontFamily: "Gosan",
-                      fontSize: 20.0,
-                      color: Color(0xFF6A74CF),
-                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${DateFormat('yyyy').format(_selectedDate)}.${_selectedDate.month}.${_selectedDate.day}',
+                        style: TextStyle(
+                          fontFamily: "Gosan",
+                          fontSize: 20.0,
+                          color: Color(0xFF6A74CF),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -223,45 +268,6 @@ class _IDFindingPageState extends State<PWFindingPage> {
                   },
                 ),
                 SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 38,
-                    ),
-                    Text(
-                      '전화번호:',
-                      style: TextStyle(
-                        fontFamily: "Gosan",
-                        fontSize: 20.0,
-                        color: Colors.black87,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  width: 300,
-                  height: 60,
-                  child: TextFormField(
-                    controller: _findingNumberController,
-                    inputFormatters: [
-                      MultiMaskedTextInputFormatter(
-                          masks: ['xxx-xxxx-xxxx', 'xxx-xxx-xxxx'],
-                          separator: '-')
-                    ],
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: '찾고자 하는 사람의 번호를 적어주세요.',
-                    ),
-                  ),
-                ),
-                SizedBox(
                   height: 50,
                 ),
                 Container(
@@ -281,6 +287,12 @@ class _IDFindingPageState extends State<PWFindingPage> {
                       _name = _findingNameController.text;
                       _num = _findingNumberController.text;
                       _ID = _findingIDController.text;
+                      // if(foundID!.isBlank){
+                      //   _ID=foundID;
+                      // }
+                      // else{
+                      //   _ID = _findingIDController.text;
+                      // }
                       showDialog(
                           context: context,
                           barrierDismissible: false,
@@ -394,9 +406,7 @@ class _IDFindingPageState extends State<PWFindingPage> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
-                                    // Get.offNamed(
-                                    //     "/first/login/signup/partner3");
+                                    Get.offNamed("/first/login/signup/numberAuth", arguments: type);
                                   },
                                   child: Text('예'),
                                 ),
