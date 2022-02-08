@@ -3,7 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'pages/ID_finding_page.dart';
 import 'pages/IDandPW_page.dart';
+import 'pages/PW_finding_page.dart';
 import 'pages/complete_page.dart';
 import 'pages/first_page.dart';
 import 'pages/found_account_page.dart';
@@ -103,7 +105,11 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/first/login/findingID',
-          page: () => PartnerOnlyPage(),
+          page: () => IDFindingPage(),
+        ),
+        GetPage(
+          name: '/first/login/findingPW',
+          page: () => PWFindingPage(),
         ),
       ],
     );

@@ -139,7 +139,7 @@ class LoginPage extends StatelessWidget {
                     primary: Color(0xFF6A74CF), //글자색
                     textStyle: TextStyle(
                       fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
+                      // decoration: TextDecoration.underline,
                     ),
                     alignment: Alignment.topCenter,
                   ),

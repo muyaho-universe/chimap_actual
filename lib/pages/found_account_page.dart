@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FoundPageSelectPage extends StatelessWidget {
   const FoundPageSelectPage({Key? key}) : super(key: key);
@@ -51,7 +52,9 @@ class FoundPageSelectPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed('/first/login/findingID');
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -91,7 +94,9 @@ class FoundPageSelectPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed('/first/login/findingPW');
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
