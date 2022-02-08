@@ -71,17 +71,22 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 170,
-                        height: 60,
-                        child: Text(
-                          '${DateFormat('yyyy').format(_selectedDate)}.${_selectedDate.month}.${_selectedDate.day}',
-                          style: TextStyle(
-                            fontFamily: "Gosan",
-                            fontSize: 30.0,
-                            color: Colors.black87,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 170,
+                            height: 60,
+                            child: Text(
+                              '${DateFormat('yyyy').format(_selectedDate)}.${_selectedDate.month}.${_selectedDate.day}',
+                              style: TextStyle(
+                                fontFamily: "Gosan",
+                                fontSize: 30.0,
+                                color:Color(0xFF6A74CF),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
@@ -194,13 +199,25 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
                             ),
                             content: SingleChildScrollView(
                               child: ListBody(children: <Widget>[
-                                Text(
-                                  '생년월일: ${DateFormat('yyyy').format(_selectedDate)}.${_selectedDate.month}.${_selectedDate.day}',
-                                  style: TextStyle(
-                                    fontFamily: "Gosan",
-                                    fontSize: 18.0,
-                                    color:Color(0xFF6A74CF),
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '생년월일: ',
+                                      style: TextStyle(
+                                        fontFamily: "Gosan",
+                                        fontSize: 18.0,
+                                        color:Colors.black87,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${DateFormat('yyyy').format(_selectedDate)}.${_selectedDate.month}.${_selectedDate.day}',
+                                      style: TextStyle(
+                                        fontFamily: "Gosan",
+                                        fontSize: 18.0,
+                                        color:Color(0xFF6A74CF),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 15.0,),
                                 Text(

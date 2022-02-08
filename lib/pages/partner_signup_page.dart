@@ -148,13 +148,25 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
                             ),
                             content: SingleChildScrollView(
                               child: ListBody(children: <Widget>[
-                                Text(
-                                  '성함: $InputUserName',
-                                  style: TextStyle(
-                                    fontFamily: "Gosan",
-                                    fontSize: 18.0,
-                                    color:Color(0xFF6A74CF),
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '성함: ',
+                                      style: TextStyle(
+                                        fontFamily: "Gosan",
+                                        fontSize: 18.0,
+                                        color:Colors.black87,
+                                      ),
+                                    ),
+                                    Text(
+                                      '$InputUserName',
+                                      style: TextStyle(
+                                        fontFamily: "Gosan",
+                                        fontSize: 18.0,
+                                        color:Color(0xFF6A74CF),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 15.0,),
                                 Text(

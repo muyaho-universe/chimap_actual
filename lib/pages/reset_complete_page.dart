@@ -27,6 +27,31 @@ class PWResetCompletePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Container(
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                // border: Border.all(
+                //   width: 2.0,
+                // ),
+              color: Color(0xFFFFBD9D).withOpacity(0.87),
+            ),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(width: 10.0),
+                  Image.asset(
+                    'asset/images/lockChecked.png',
+                    width: 180,
+                    height: 180,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 40,),
           Text(
             '비밀번호가\n',
             style: TextStyle(
