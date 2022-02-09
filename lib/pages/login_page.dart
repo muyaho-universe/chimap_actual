@@ -10,6 +10,10 @@ class LoginPage extends StatelessWidget {
   final _loginFormKey = GlobalKey<FormState>();
 
   final loginController = Get.put(LoginController());
+
+  final TextEditingController _loginIDController = TextEditingController();
+  final TextEditingController _loginPWController = TextEditingController();
+
   var _num = 22.0;
 
   @override
@@ -54,19 +58,27 @@ class LoginPage extends StatelessWidget {
                   width: 300,
                   height: 60,
                   child: TextFormField(
+                    controller: _loginIDController,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
                       hintText: '아이디 입력',
                     ),
+                    validator: (value) {
+                      if (value!.trim().isEmpty) {
+                        return '이메일을 입력하세요.';
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
                 ),
-
                 SizedBox(height: 15),
                 Container(
                   width: 300,
                   height: 80,
                   child: Obx(
                     () => TextFormField(
+                      controller: _loginPWController,
                       obscureText: !loginController.visibility.value,
                       style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
@@ -83,6 +95,13 @@ class LoginPage extends StatelessWidget {
                         ),
                         hintText: '비밀번호 입력',
                       ),
+                      validator: (value) {
+                        if (value!.trim().isEmpty) {
+                          return '비밀번호를 입력하세요.';
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -93,20 +112,24 @@ class LoginPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                   ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      primary: Color(0xFFFFBD9D),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      '로그인',
-                      style: TextStyle(
-                        fontFamily: "Gosan",
-                        fontSize: 28.0,
-                        color: Colors.black87,
+                  child: Obx(
+                    () => ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        primary: Color(0xFFFFBD9D),
+                      ),
+                      onPressed: () async {
+                        _emailLogin();
+                      },
+                      child: const Text(
+                        '로그인',
+                        style: TextStyle(
+                          fontFamily: "Gosan",
+                          fontSize: 28.0,
+                          color: Colors.black87,
+                        ),
                       ),
                     ),
                   ),
@@ -180,6 +203,35 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _emailLogin() async {
+    // try {
+    //   User? user = await Authentication.signInWithEmailAndPassword(
+    //       _signInEmailController.text, _signInPasswordController.text);
+    //   if (user != null) {
+    //     if (loginController.option.value == Option.USER)
+    //       Get.offNamed('/login/home');
+    //     else
+    //       Get.offNamed('/login/admin');
+    //     // if (user.emailVerified) {
+    //     //   Get.offNamed('/login/home');
+    //     // } else {
+    //     //   Get.snackbar(
+    //     //     "이메일 인증 미확인",
+    //     //     "인증 메일을 보냈습니다. 해당 이메일을 확인하세요.🙁",
+    //     //   );
+    //     //   await FirebaseAuth.instance.signOut();
+    //     //   loginController.notLoging();
+    //     // }
+    //   } else {
+    //     loginController.notLoging();
+    //   }
+    // } catch (e) {
+    //   loginController.notLoging();
+    //   print('email login failed');
+    //   print(e.toString());
+    // }
   }
 }
 

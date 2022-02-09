@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class findingIDInfoPage extends StatelessWidget {
-  findingIDInfoPage({Key? key}) : super(key: key);
+class findingIDInfoPage extends StatefulWidget {
+  const findingIDInfoPage({Key? key}) : super(key: key);
 
+  @override
+  _findingIDInfoPageState createState() => _findingIDInfoPageState();
+}
+
+class _findingIDInfoPageState extends State<findingIDInfoPage> {
   String? _ID = '&&&&&&';
 
   @override
@@ -30,7 +35,9 @@ class findingIDInfoPage extends StatelessWidget {
         children: [
           Column(
             children: [
-              SizedBox(height: 100,),
+              SizedBox(
+                height: 100,
+              ),
               Text(
                 '***님의 아이디는\n',
                 style: TextStyle(
@@ -55,7 +62,9 @@ class findingIDInfoPage extends StatelessWidget {
                   color: Colors.black87,
                 ),
               ),
-              SizedBox(height: 50,),
+              SizedBox(
+                height: 50,
+              ),
               Container(
                 width: 350.0,
                 height: 60,
@@ -80,7 +89,9 @@ class findingIDInfoPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Container(
                 width: 350.0,
                 height: 60,
@@ -93,7 +104,42 @@ class findingIDInfoPage extends StatelessWidget {
                     primary: Color(0xFFFFBD9D),
                   ),
                   onPressed: () {
-                    Get.offNamed("/first/login/findingPW", arguments: _ID);
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              '정보!',
+                              style: TextStyle(
+                                fontFamily: "Gosan",
+                                fontSize: 24.0,
+                                color: Colors.black,
+                              ),
+                            ),
+                            content: SingleChildScrollView(
+                              child: ListBody(children: <Widget>[
+                                Text(
+                                  '아이디를 따로 치지 않으셔도 됩니다.',
+                                  style: TextStyle(
+                                    fontFamily: "Gosan",
+                                    fontSize: 18.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ]),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Get.offNamed("/first/login/findingPW",
+                                      arguments: _ID);
+                                },
+                                child: Text('예'),
+                              ),
+                            ],
+                          );
+                        });
                   },
                   child: const Text(
                     '비밀번호 찾기',
@@ -107,7 +153,6 @@ class findingIDInfoPage extends StatelessWidget {
               ),
             ],
           ),
-
         ],
       ),
     );

@@ -8,13 +8,11 @@ import 'package:chimap_actual/utils/user_model.dart';
 class PartnerSignUpPage1 extends StatefulWidget {
   PartnerSignUpPage1({Key? key}) : super(key: key);
 
-
   @override
   _PartnerSignUpPage1State createState() => _PartnerSignUpPage1State();
 }
 
 class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
-
   final _signUpFormKey = GlobalKey<FormState>();
   final userController = Get.put(UserController());
 
@@ -22,7 +20,8 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
   UserModel userModel = UserModel();
   var type = Get.arguments;
 
-  final TextEditingController _signUpUserNameController = TextEditingController();
+  final TextEditingController _signUpUserNameController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +115,9 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
                   ),
                 ),
               ),
-              SizedBox(width: 10,),
+              SizedBox(
+                width: 10,
+              ),
               Container(
                 width: 131.0,
                 height: 31.0,
@@ -155,7 +156,7 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
                                       style: TextStyle(
                                         fontFamily: "Gosan",
                                         fontSize: 18.0,
-                                        color:Colors.black87,
+                                        color: Colors.black87,
                                       ),
                                     ),
                                     Text(
@@ -163,12 +164,14 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
                                       style: TextStyle(
                                         fontFamily: "Gosan",
                                         fontSize: 18.0,
-                                        color:Color(0xFF6A74CF),
+                                        color: Color(0xFF6A74CF),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 15.0,),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
                                 Text(
                                   '맞으시면 "예"를 눌러주세요',
                                   style: TextStyle(
@@ -188,15 +191,14 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Get.offNamed("/first/login/signup/partner2", arguments: type);
+                                  Get.offNamed("/first/login/signup/partner2",
+                                      arguments: type);
                                 },
                                 child: Text('예'),
                               ),
                             ],
                           );
                         });
-
-
                   },
                   child: const Text(
                     '다음',

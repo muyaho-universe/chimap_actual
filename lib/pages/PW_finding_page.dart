@@ -31,6 +31,7 @@ class _IDFindingPageState extends State<PWFindingPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -47,6 +48,9 @@ class _IDFindingPageState extends State<PWFindingPage> {
   }
 
   _bodyWidget() {
+    if (foundID != null) {
+      _findingIDController.text = foundID;
+    }
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Center(
