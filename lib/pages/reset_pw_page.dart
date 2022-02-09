@@ -7,7 +7,10 @@ class ResetPWPage extends StatelessWidget {
   final _PWresetFormKey = GlobalKey<FormState>();
   final TextEditingController _resetPWController = TextEditingController();
   final TextEditingController _resetPWConfirmController =
-  TextEditingController();
+      TextEditingController();
+
+  final resetController = Get.put(ResetController());
+  final resetConfirmController = Get.put(ResetConfirmController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,9 @@ class ResetPWPage extends StatelessWidget {
                       color: Colors.black87,
                     ),
                   ),
-                  SizedBox(height: 50,),
+                  SizedBox(
+                    height: 50,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -70,12 +75,27 @@ class ResetPWPage extends StatelessWidget {
                   ),
                   Container(
                     width: 300,
-                    height: 60,
-                    child: TextFormField(
-                      controller: _resetPWController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: '비밀번호를 입력해주세요.',
+                    height: 80,
+                    child: Obx(
+                      () => TextFormField(
+                        controller: _resetPWController,
+                        obscureText: !resetController.visibility.value,
+                        style: TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              resetController.visible();
+                            },
+                            icon: Icon(
+                              resetController.visibility.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
+                          hintText: '비밀번호 입력',
+                        ),
                       ),
                     ),
                   ),
@@ -103,16 +123,33 @@ class ResetPWPage extends StatelessWidget {
                   ),
                   Container(
                     width: 300,
-                    height: 60,
-                    child: TextFormField(
-                      controller: _resetPWConfirmController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: '비밀번호를 다시 한번 입력해주세요.',
+                    height: 80,
+                    child: Obx(
+                          () => TextFormField(
+                        controller: _resetPWConfirmController,
+                        obscureText: !resetConfirmController.visibility.value,
+                        style: TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              resetConfirmController.visible();
+                            },
+                            icon: Icon(
+                              resetConfirmController.visibility.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
+                          hintText: '비밀번호를 다시 한번 입력해주세요',
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 50,),
+                  SizedBox(
+                    height: 50,
+                  ),
                   Container(
                     width: 350.0,
                     height: 60,
@@ -137,10 +174,50 @@ class ResetPWPage extends StatelessWidget {
                       ),
                     ),
                   ),
-            ]),
+                ]),
           ),
         ),
       ),
     );
+  }
+}
+
+class ResetController extends GetxController {
+  var visibility = false.obs;
+  var isLoging = false.obs;
+
+  visible() {
+    visibility.value ? visibility.value = false : visibility.value = true;
+    update();
+  }
+
+  loging() {
+    isLoging.value = true;
+    update();
+  }
+
+  notLoging() {
+    isLoging.value = false;
+    update();
+  }
+}
+
+class ResetConfirmController extends GetxController {
+  var visibility = false.obs;
+  var isLoging = false.obs;
+
+  visible() {
+    visibility.value ? visibility.value = false : visibility.value = true;
+    update();
+  }
+
+  loging() {
+    isLoging.value = true;
+    update();
+  }
+
+  notLoging() {
+    isLoging.value = false;
+    update();
   }
 }
