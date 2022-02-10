@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kopo/kopo.dart';
 
+enum Option { MALE, FEMALE }
+
 class IDandPWPage extends StatefulWidget {
   const IDandPWPage({Key? key}) : super(key: key);
 
@@ -13,14 +15,14 @@ class IDandPWPage extends StatefulWidget {
 
 class _IDandPWPageState extends State<IDandPWPage> {
   final _IPsignUpFormKey = GlobalKey<FormState>();
-  final userController = Get.put(UserController());
+  final userLoginController = Get.put(UserLoginController());
 
   final TextEditingController _signUpIDController = TextEditingController();
   final TextEditingController _signUpPWController = TextEditingController();
   final TextEditingController _signUpPWConfirmController =
       TextEditingController();
   var type = Get.arguments;
-
+  bool go = true;
   List<bool> _selections1 = List.generate(2, (index) => false);
 
   @override
@@ -179,6 +181,13 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       border: OutlineInputBorder(),
                       hintText: '비밀번호를 다시 한번 입력해주세요.',
                     ),
+                    validator: (value) {
+                      if (value!.trim() != _signUpPWController.text) {
+                        return '비밀번호가 다릅니다.';
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
                 ),
                 SizedBox(
@@ -203,17 +212,52 @@ class _IDandPWPageState extends State<IDandPWPage> {
                 SizedBox(
                   height: 5,
                 ),
-                ToggleButtons(
-                    onPressed: (int index) {
-                      setState(() {
-                        _selections1[index] = !_selections1[index];
-                      });
-                    },
-                    children: <Widget>[
-                      Text('남자'),
-                      Text('여자'),
+                Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Row(
+                        children: [
+                          Radio(
+                            value: Option.MALE,
+                            groupValue: userLoginController.option.value,
+                            onChanged: (value) {
+                              userLoginController.option.value =
+                                  value as Option;
+                            },
+                          ),
+                          Text(
+                            '남자',
+                            style: TextStyle(
+                              fontFamily: "Gosan",
+                              fontSize: 20.0,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                            value: Option.FEMALE,
+                            groupValue: userLoginController.option.value,
+                            onChanged: (value) {
+                              userLoginController.option.value =
+                                  value as Option;
+                            },
+                          ),
+                          Text(
+                            '여자',
+                            style: TextStyle(
+                              fontFamily: "Gosan",
+                              fontSize: 20.0,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-                    isSelected: _selections1,
+                  ),
                 ),
                 SizedBox(
                   height: 15,
@@ -289,13 +333,50 @@ class _IDandPWPageState extends State<IDandPWPage> {
                           primary: Color(0xFFFFBD9D),
                         ),
                         onPressed: () {
-                          if(type == 1){
-                            Get.offNamed('/first/login/signup/partnerOnly');
+                          if (_signUpPWController.text ==
+                              _signUpPWConfirmController.text) {
+                            if (type == 1) {
+                              Get.offNamed('/first/login/signup/partnerOnly');
+                            } else {
+                              Get.offNamed("/first/login/signup/complete");
+                            }
+                          } else {
+                            showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                      '비밀번호가 다릅니다!',
+                                      style: TextStyle(
+                                        fontFamily: "Gosan",
+                                        fontSize: 24.0,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(children: <Widget>[
+                                        Text(
+                                          '비밀번호를 다시 확인해주세요!',
+                                          style: TextStyle(
+                                            fontFamily: "Gosan",
+                                            fontSize: 18.0,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                      ]),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('예'),
+                                      ),
+                                    ],
+                                  );
+                                });
                           }
-                          else {
-                            Get.offNamed("/first/login/signup/complete");
-                          }
-
                         },
                         child: const Text(
                           '다음',
@@ -318,5 +399,25 @@ class _IDandPWPageState extends State<IDandPWPage> {
   }
 }
 
-void searchingAdress() {
+void searchingAdress() {}
+
+class UserLoginController extends GetxController {
+  var visibility = false.obs;
+  var isLoging = false.obs;
+  var option = Option.MALE.obs;
+
+  visible() {
+    visibility.value ? visibility.value = false : visibility.value = true;
+    update();
+  }
+
+  loging() {
+    isLoging.value = true;
+    update();
+  }
+
+  notLoging() {
+    isLoging.value = false;
+    update();
+  }
 }

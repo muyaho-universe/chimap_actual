@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'package:chimap_actual/auth/authentication.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -65,7 +68,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     validator: (value) {
                       if (value!.trim().isEmpty) {
-                        return '이메일을 입력하세요.';
+                        return '아이디를 입력하세요.';
                       } else {
                         return null;
                       }
@@ -121,16 +124,23 @@ class LoginPage extends StatelessWidget {
                         primary: Color(0xFFFFBD9D),
                       ),
                       onPressed: () async {
-                        _emailLogin();
+                        if (_loginFormKey.currentState!.validate()) {
+                          loginController.loging();
+                          _emailLogin();
+                        }
                       },
-                      child: const Text(
-                        '로그인',
-                        style: TextStyle(
-                          fontFamily: "Gosan",
-                          fontSize: 28.0,
-                          color: Colors.black87,
-                        ),
-                      ),
+                      child: !loginController.isLoging.value
+                          ? const Text(
+                              '로그인',
+                              style: TextStyle(
+                                fontFamily: "Gosan",
+                                fontSize: 28.0,
+                                color: Colors.black87,
+                              ),
+                            )
+                          : const CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
                     ),
                   ),
                 ),
@@ -206,32 +216,18 @@ class LoginPage extends StatelessWidget {
   }
 
   Future<void> _emailLogin() async {
-    // try {
-    //   User? user = await Authentication.signInWithEmailAndPassword(
-    //       _signInEmailController.text, _signInPasswordController.text);
-    //   if (user != null) {
-    //     if (loginController.option.value == Option.USER)
-    //       Get.offNamed('/login/home');
-    //     else
-    //       Get.offNamed('/login/admin');
-    //     // if (user.emailVerified) {
-    //     //   Get.offNamed('/login/home');
-    //     // } else {
-    //     //   Get.snackbar(
-    //     //     "이메일 인증 미확인",
-    //     //     "인증 메일을 보냈습니다. 해당 이메일을 확인하세요.🙁",
-    //     //   );
-    //     //   await FirebaseAuth.instance.signOut();
-    //     //   loginController.notLoging();
-    //     // }
-    //   } else {
-    //     loginController.notLoging();
-    //   }
-    // } catch (e) {
-    //   loginController.notLoging();
-    //   print('email login failed');
-    //   print(e.toString());
-    // }
+    try {
+      User? user = await Authentication.signInWithEmailAndPassword(
+          _loginIDController.text, _loginPWController.text);
+      if (user != null) {
+      } else {
+        loginController.notLoging();
+      }
+    } catch (e) {
+      loginController.notLoging();
+      print('email login failed');
+      print(e.toString());
+    }
   }
 }
 

@@ -189,6 +189,3 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
   }
 }
 
-// void verifyPhoneNumber() async {
-//
-// }

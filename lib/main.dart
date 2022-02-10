@@ -25,8 +25,8 @@ import 'package:http/http.dart' as http;
 import 'repository/location_search.dart';
 
 Future<void> main() async {
-  //WidgetsFlutterBinding.ensureInitialized(); // Flutter 비동기 실행을 위한 코드
-  // await Firebase.initializeApp(); // Firebase 초기화
+  WidgetsFlutterBinding.ensureInitialized(); // Flutter 비동기 실행을 위한 코드
+  await Firebase.initializeApp(); // Firebase 초기화
   runApp(const MyApp());
 }
 

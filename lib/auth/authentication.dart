@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Authentication {
   static Future<User?> signUpWithEmailAndPassword(
-      String ID, String password, String nickName, String userType) async {
+      String ID, String password, String nickName, String phoneNumber,String userType) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     try {
       UserCredential result = await auth.createUserWithEmailAndPassword(
@@ -19,7 +19,7 @@ class Authentication {
         FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           "uid": user.uid,
           "displayName": nickName,
-          // "phoneNumver": phoneNumber,
+          "phoneNumber": phoneNumber,
           "userType": userType,
         });
         return user;
@@ -35,8 +35,8 @@ class Authentication {
         );
       } else {
         Get.snackbar(
-          "중복 이메일",
-          "이미 사용중인 이메일입니다.🙁",
+          "중복 아이디",
+          "이미 사용중인 아이디입니다.🙁",
         );
       }
       print('sign up failed');
@@ -44,12 +44,12 @@ class Authentication {
   }
 
   static Future<User?> signInWithEmailAndPassword(
-      String email, String password) async {
+      String ID, String password) async {
     final auth = FirebaseAuth.instance;
 
     try {
       UserCredential result = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
+          email: ID, password: password);
 
       User? user = result.user;
 
@@ -67,14 +67,14 @@ class Authentication {
         switch (e.toString()) {
           case '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.':
             Get.snackbar(
-              "존재하지 않는 이메일 입니다.",
+              "존재하지 않는 아이디입니다.",
               "회원가입을 먼저 해주세요.🙁",
             );
             break;
           case '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.':
             Get.snackbar(
-              "패스워드가 틀렸습니다.",
-              "패스워드를 확인 해주세요.🙁c",
+              "비밀번호가 틀렸습니다.",
+              "비밀번호를 확인 해주세요.🙁c",
             );
             break;
           case '[firebase_auth/network-request-failed] A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
@@ -92,4 +92,8 @@ class Authentication {
       }
     }
   }
+
+  // static Future <User?> PhoneAuthProvider(
+  //     val options
+  //     ) async{}
 }
