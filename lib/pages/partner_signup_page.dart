@@ -190,9 +190,10 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
                                 child: Text('아니오'),
                               ),
                               TextButton(
-                                onPressed: () {
+                                onPressed: () async {
+                                  final userModel = UserModel(uid: '', userName: InputUserName, userType: 'type', userDate: DateTime.now(), phoneNumber: '');
                                   Get.offNamed("/first/login/signup/partner2",
-                                      arguments: type);
+                                      arguments: userModel);
                                 },
                                 child: Text('예'),
                               ),

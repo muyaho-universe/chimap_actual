@@ -1,6 +1,9 @@
+import 'package:chimap_actual/utils/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import 'dart:io';
 
 class PartnerSignUpPage2 extends StatefulWidget {
   PartnerSignUpPage2({Key? key}) : super(key: key);
@@ -13,10 +16,13 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
   final _signUpFormKey = GlobalKey<FormState>();
 
   DateTime _selectedDate = DateTime.now();
-  var type = Get.arguments;
+  // var type = Get.arguments;
+  UserModel userModel = Get.arguments;
+
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -39,6 +45,7 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
         children: <Widget>[
           const SizedBox(height: 25.0),
           Container(
+
             width: 310,
             height: 457,
             child: Form(
@@ -129,7 +136,10 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                       );
-
+                      if(true){
+                        UserModel _userModel = Get.arguments;
+                        print(_userModel.userName);
+                      }
                       future.then((date) {
                         setState(() {
                           _selectedDate = date!.add(const Duration(hours: 9));
@@ -239,7 +249,7 @@ class _PartnerSignUpPage2State extends State<PartnerSignUpPage2> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Get.offNamed("/first/login/signup/partner3", arguments: type);
+                                  Get.offNamed("/first/login/signup/partner3");
                                 },
                                 child: Text('예'),
                               ),
