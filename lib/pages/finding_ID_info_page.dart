@@ -19,7 +19,16 @@ class _findingIDInfoPageState extends State<findingIDInfoPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('아이디 정보'),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          title: Text(
+            '아이디 정보',
+            style: TextStyle(
+              fontFamily: "Gosan",
+              fontSize: 28.0,
+              color: Colors.black87,
+            ),
+          ),
           backgroundColor: const Color(0xFFFFCAB0),
         ),
         //backgroundColor: Colors.white,
@@ -77,7 +86,7 @@ class _findingIDInfoPageState extends State<findingIDInfoPage> {
                     primary: Color(0xFFFFBD9D),
                   ),
                   onPressed: () {
-                    Get.offNamed("/first/login");
+                    Get.offAllNamed("/first/login");
                   },
                   child: const Text(
                     '로그인 하러 가기',

@@ -1,8 +1,10 @@
 import 'package:chimap_actual/utils/user_controller.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kopo/kopo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 
 enum Option { MALE, FEMALE }
 
@@ -23,7 +25,10 @@ class _IDandPWPageState extends State<IDandPWPage> {
       TextEditingController();
   var type = Get.arguments;
   bool go = true;
-  List<bool> _selections1 = List.generate(2, (index) => false);
+  late Reference firebaseStorageRef;
+  late var mapUrl =
+      'http://www.juso.go.kr/addrlink/addrLinkApi.do?confirmKey=devU01TX0FVVEgyMDIyMDIwNzE2NDk0NzExMjIxNDk=';
+  late CollectionReference database;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +49,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
 
   _bodyWidget() {
     List<bool> isSelected = List.generate(2, (index) => false);
+    var result;
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Form(
@@ -281,12 +287,23 @@ class _IDandPWPageState extends State<IDandPWPage> {
                 SizedBox(
                   height: 5,
                 ),
+                SizedBox(
+                  height: 5,
+                ),
                 ElevatedButton(
-                  child: Text('우편주소검색'),
+                  child: Text(
+                    '우편주소검색',
+                    style: TextStyle(
+                      fontFamily: "Gosan",
+                      fontSize: 14.0,
+                      color: Colors.black87,
+                    ),
+                  ),
                   onPressed: () async {
-                    searchingAdress();
+                    Get.toNamed('/first/login/locationSearch');
                   },
                 ),
+                Text("$result"),
                 SizedBox(
                   height: 15,
                 ),
@@ -398,8 +415,6 @@ class _IDandPWPageState extends State<IDandPWPage> {
     );
   }
 }
-
-void searchingAdress() {}
 
 class UserLoginController extends GetxController {
   var visibility = false.obs;

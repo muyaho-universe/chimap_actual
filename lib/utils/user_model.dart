@@ -4,7 +4,7 @@ class UserModel {
   String? uid;
   String? userName;
   String? phoneNumber;
-  String? userType;
+  int? userType;
   DateTime? userDate;
 
   UserModel({

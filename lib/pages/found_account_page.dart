@@ -12,8 +12,21 @@ class FoundPageSelectPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('계정찾기'),
-          backgroundColor: const Color(0xFFFFCAB0),
+          title: Text('계정찾기',style: TextStyle(
+            fontFamily: "Gosan",
+            fontSize: 28.0,
+            color: Colors.black87,
+          ),
+        ),
+        backgroundColor: const Color(0xFFFFCAB0),
+        centerTitle: true, // 중앙 정렬
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
+          onPressed: () {
+            Get.offNamed('/first/login');
+          },
+        ),
         ),
         //backgroundColor: Colors.white,
         body: _bodyWidget(),

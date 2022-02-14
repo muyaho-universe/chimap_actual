@@ -27,8 +27,22 @@ class LoginPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('치맵'),
+          title: Text('치맵',
+            style: TextStyle(
+              fontFamily: "Gosan",
+              fontSize: 28.0,
+              color: Colors.black87,
+            ),
+          ),
           backgroundColor: const Color(0xFFFFCAB0),
+          centerTitle: true, // 중앙 정렬
+          elevation: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.home), // 햄버거버튼 아이콘 생성
+            onPressed: () {
+              Get.offAllNamed('/first');
+            },
+          ),
         ),
         resizeToAvoidBottomInset: false, //키보드 올라와도 안밀리게 해줌
         backgroundColor: Colors.white,
@@ -220,6 +234,7 @@ class LoginPage extends StatelessWidget {
       User? user = await Authentication.signInWithEmailAndPassword(
           _loginIDController.text, _loginPWController.text);
       if (user != null) {
+        Get.toNamed('/first/login/timesetPage1');
       } else {
         loginController.notLoging();
       }

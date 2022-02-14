@@ -1,3 +1,4 @@
+import 'package:chimap_actual/pages/location_search_page.dart';
 import 'package:chimap_actual/pages/number_auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:get/get.dart';
 import 'pages/ID_finding_page.dart';
 import 'pages/IDandPW_page.dart';
 import 'pages/PW_finding_page.dart';
+import 'pages/after_test_Pages/checking_time_page.dart';
+import 'pages/after_test_Pages/checking_time_page2.dart';
 import 'pages/complete_page.dart';
 import 'pages/finding_ID_info_page.dart';
 import 'pages/first_page.dart';
@@ -22,6 +25,8 @@ import 'pages/partner_signup_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
 
+
+import 'pages/splash_screen.dart';
 import 'repository/location_search.dart';
 
 Future<void> main() async {
@@ -48,8 +53,12 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: createMaterialColor(Color(0xFFFFBD9D)),
       ),
-      initialRoute: '/first',
+      initialRoute: '/splah',
       getPages: [
+        GetPage(
+          name: '/splah',
+          page: () => SplashPage(),
+        ),
         GetPage(
           name: '/first',
           page: () => FirstPage(),
@@ -99,10 +108,6 @@ class MyApp extends StatelessWidget {
           page: () => CompletePage(),
         ),
         GetPage(
-          name: '/first/search',
-          page: () => HttpApp(),
-        ),
-        GetPage(
           name: '/first/login/signup/partnerOnly',
           page: () => PartnerOnlyPage(),
         ),
@@ -125,6 +130,18 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/first/login/compresetPW',
           page: () => PWResetCompletePage(),
+        ),
+        GetPage(
+          name: '/first/login/locationSearch',
+          page: () => LocationSearchPage(),
+        ),
+        GetPage(
+          name: '/first/login/timesetPage1',
+          page: () => TimeSettingPage1(),
+        ),
+        GetPage(
+          name: '/first/login/timesetPage2',
+          page: () => TimeSettingPage2(),
         ),
       ],
     );

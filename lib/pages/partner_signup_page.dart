@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:chimap_actual/utils/user_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chimap_actual/utils/user_model.dart';
@@ -22,6 +24,9 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
 
   final TextEditingController _signUpUserNameController =
       TextEditingController();
+  late Reference firebaseStorageRef;
+  late UploadTask uploadTask;
+  late CollectionReference database;
 
   @override
   Widget build(BuildContext context) {
@@ -191,9 +196,9 @@ class _PartnerSignUpPage1State extends State<PartnerSignUpPage1> {
                               ),
                               TextButton(
                                 onPressed: () async {
-                                  final userModel = UserModel(uid: '', userName: InputUserName, userType: 'type', userDate: DateTime.now(), phoneNumber: '');
+                                  database.add({'userName': InputUserName});
                                   Get.offNamed("/first/login/signup/partner2",
-                                      arguments: userModel);
+                                      arguments: type);
                                 },
                                 child: Text('예'),
                               ),
