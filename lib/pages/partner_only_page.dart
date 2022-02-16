@@ -6,7 +6,7 @@ class PartnerOnlyPage extends StatelessWidget {
   PartnerOnlyPage({Key? key}) : super(key: key);
 
   final _partnerFormKey = GlobalKey<FormState>();
-  final userController = Get.put(UserController());
+  // final userController = Get.put(UserController());
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _userPhoneNumController = TextEditingController();

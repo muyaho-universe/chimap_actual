@@ -15,7 +15,7 @@ class _IDFindingPageState extends State<IDFindingPage> {
   DateTime _selectedDate = DateTime.now();
 
   final _IDfindingFormKey = GlobalKey<FormState>();
-  final userController = Get.put(UserController());
+  // final userController = Get.put(UserController());
 
   final TextEditingController _findingNameController = TextEditingController();
   final TextEditingController _findingNumberController =

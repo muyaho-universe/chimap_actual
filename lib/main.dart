@@ -9,19 +9,18 @@ import 'pages/IDandPW_page.dart';
 import 'pages/PW_finding_page.dart';
 import 'pages/after_test_Pages/checking_time_page.dart';
 import 'pages/after_test_Pages/checking_time_page2.dart';
+import 'pages/after_test_Pages/kiadl_init_page.dart';
+import 'pages/after_test_Pages/tests_page.dart';
 import 'pages/complete_page.dart';
 import 'pages/finding_ID_info_page.dart';
 import 'pages/first_page.dart';
 import 'pages/found_account_page.dart';
-import 'pages/information_confirm_page.dart';
 import 'pages/login_page.dart';
+import 'pages/pageView_signup_page.dart';
 import 'pages/partner_only_page.dart';
-import 'pages/partner_signup_page2.dart';
-import 'pages/partner_signup_page3.dart';
 import 'pages/reset_complete_page.dart';
 import 'pages/reset_pw_page.dart';
 import 'pages/signup_page.dart';
-import 'pages/partner_signup_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
 
@@ -76,24 +75,12 @@ class MyApp extends StatelessWidget {
           page: () => SignUpPage(),
         ),
         GetPage(
-          name: '/first/login/signup/partner1',
-          page: () => PartnerSignUpPage1(),
-        ),
-        GetPage(
-          name: '/first/login/signup/partner2',
-          page: () => PartnerSignUpPage2(),
-        ),
-        GetPage(
-          name: '/first/login/signup/partner3',
-          page: () => PartnerSignUpPage3(),
+          name: '/first/login/signup/viewST',
+          page: () => PageViweSignUpPage(),
         ),
         GetPage(
           name: '/first/login/accountfound',
           page: () => FoundPageSelectPage(),
-        ),
-        GetPage(
-          name: '/first/login/signup/infoConfirm',
-          page: () => informationConfirmPage(),
         ),
         GetPage(
           name: '/first/login/signup/numberAuth',
@@ -142,6 +129,14 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/first/login/timesetPage2',
           page: () => TimeSettingPage2(),
+        ),
+        GetPage(
+          name: '/testInitPage',
+          page: () => TestInitPage(),
+        ),
+        GetPage(
+          name: '/testInitPage/tests',
+          page: () => TestsPage(),
         ),
       ],
     );

@@ -140,7 +140,7 @@ class _TimeSettingPage1 extends State<TimeSettingPage1> {
                             height: 20,
                             color: Color(0xEBFFBD9D),
                             child: Image.asset(
-                              'asset/images/muyaho.jpg',
+                              'asset/images/clock.png',
                             ),
                           ),
                           SizedBox(

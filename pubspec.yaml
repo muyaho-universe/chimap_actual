@@ -48,6 +48,7 @@ dependencies:
   fluttertoast: ^8.0.8
   firebase_storage: ^10.2.7
   rxdart: ^0.27.3
+  flutter_tts: ^3.3.3
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +90,7 @@ flutter:
     - asset/images/question.png
     - asset/images/check.png
     - asset/images/lockChecked.png
+    - asset/images/clock.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

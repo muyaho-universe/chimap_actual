@@ -9,7 +9,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late int type;
   @override
@@ -20,8 +19,23 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('회원가입'),
+          title: Text(
+            '회원가입',
+            style: TextStyle(
+              fontFamily: "Gosan",
+              fontSize: 28.0,
+              color: Colors.black87,
+            ),
+          ),
           backgroundColor: const Color(0xFFFFCAB0),
+          centerTitle: true, // 중앙 정렬
+          elevation: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
+            onPressed: () {
+              Get.offAllNamed('/first/login');
+            },
+          ),
         ),
         //backgroundColor: Colors.white,
         body: _bodyWidget(),
@@ -83,31 +97,29 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                               ),
                               content: SingleChildScrollView(
-                                child: ListBody(
-                                    children: <Widget>[
-                                      Text('보호자가 맞으신가요?'),
-                                      Text('맞으시면 "예"를 눌러주세요'),
-                                    ]
-                                ),
+                                child: ListBody(children: <Widget>[
+                                  Text('보호자가 맞으신가요?'),
+                                  Text('맞으시면 "예"를 눌러주세요'),
+                                ]),
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  onPressed: (){
+                                  onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                   child: Text('아니오'),
                                 ),
                                 TextButton(
-                                  onPressed: (){
+                                  onPressed: () {
                                     type = 1;
-                                    Get.toNamed("/first/login/signup/partner1", arguments: type);
+                                    Get.toNamed("/first/login/signup/viewST",
+                                        arguments: type);
                                   },
                                   child: Text('예'),
                                 ),
                               ],
                             );
-                          }
-                      );
+                          });
                     },
                     child: Row(
                       children: [
@@ -165,31 +177,29 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                               ),
                               content: SingleChildScrollView(
-                                child: ListBody(
-                                    children: <Widget>[
-                                      Text('대상자가 맞으신가요?'),
-                                      Text('맞으시면 "예"를 눌러주세요'),
-                                    ]
-                                ),
+                                child: ListBody(children: <Widget>[
+                                  Text('대상자가 맞으신가요?'),
+                                  Text('맞으시면 "예"를 눌러주세요'),
+                                ]),
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  onPressed: (){
+                                  onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                   child: Text('아니오'),
                                 ),
                                 TextButton(
-                                  onPressed: (){
+                                  onPressed: () {
                                     type = 2;
-                                    Get.toNamed("/first/login/signup/partner1", arguments: type);
+                                    Get.toNamed("/first/login/signup/viewST",
+                                        arguments: type);
                                   },
                                   child: Text('예'),
                                 ),
                               ],
                             );
-                          }
-                      ); //ShowDialog
+                          }); //ShowDialog
                     },
                     child: Row(
                       children: [
@@ -247,31 +257,29 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                               ),
                               content: SingleChildScrollView(
-                                child: ListBody(
-                                    children: <Widget>[
-                                      Text('일반인이 맞으신가요?'),
-                                      Text('맞으시면 "예"를 눌러주세요'),
-                                    ]
-                                ),
+                                child: ListBody(children: <Widget>[
+                                  Text('일반인이 맞으신가요?'),
+                                  Text('맞으시면 "예"를 눌러주세요'),
+                                ]),
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  onPressed: (){
+                                  onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                   child: Text('아니오'),
                                 ),
                                 TextButton(
-                                  onPressed: (){
+                                  onPressed: () {
                                     type = 3;
-                                    Get.toNamed("/first/login/signup/partner1", arguments: type);
+                                    Get.toNamed("/first/login/signup/viewST",
+                                        arguments: type);
                                   },
                                   child: Text('예'),
                                 ),
                               ],
                             );
-                          }
-                      );
+                          });
                     },
                     child: Row(
                       children: [

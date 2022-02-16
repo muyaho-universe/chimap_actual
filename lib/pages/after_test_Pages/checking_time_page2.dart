@@ -118,7 +118,17 @@ class _TimeSettingPage2 extends State<TimeSettingPage2> {
               ),
             ),
           ),
-
+        ElevatedButton(
+        style: ElevatedButton.styleFrom(
+        //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10)),
+    primary: Color(0xFFFFBD9D),
+    ),
+    onPressed: () {
+          Get.toNamed('/testInitPage');
+    },
+        child: Text('임시'),)
         ],
       ),
     );
