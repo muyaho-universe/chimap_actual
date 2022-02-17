@@ -29,14 +29,15 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
   );
 
   DateTime _selectedDate = DateTime.now();
-  var name;
+  String name="";
   int currentPage = 0;
-  var phoneNum;
+  String phoneNum="";
   var type = Get.arguments;
   bool _isNameEmpty = false;
   bool _isPhoneNumEmpty = true;
   late QuerySnapshot querySnapshot;
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
+  
 
   String _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -122,6 +123,11 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                           decoration: InputDecoration(
                             hintText: '이름을 입력해주세요.',
                           ),
+                          onChanged: (value){
+                            setState(() {
+                              name = _signUpUserNameController.text;
+                            });
+                          },
                         ),
                       ),
                     ],
@@ -171,9 +177,6 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                         primary: Color(0xFFFFBD9D),
                       ),
                       onPressed: () {
-                        setState(() {
-                          name = _signUpUserNameController.text;
-                        });
                         if (name!.trim().isEmpty) {
                           showDialog(
                               context: context,
@@ -587,6 +590,11 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                               return null;
                             }
                           },
+                          onChanged: (value){
+                            setState(() {
+                              phoneNum = _signUpUserPhoneNumController.text;
+                            });
+                          },
                         ),
                       ),
                       SizedBox(height: 15.0),
@@ -639,9 +647,6 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                         primary: Color(0xFFFFBD9D),
                       ),
                       onPressed: () {
-                        setState(() {
-                          phoneNum = _signUpUserPhoneNumController.text;
-                        });
                         if (phoneNum!.trim().isEmpty) {
                           showDialog(
                               context: context,
@@ -851,8 +856,12 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                             borderRadius: BorderRadius.circular(10)),
                         primary: Color(0xFFFFBD9D),
                       ),
-                      onPressed: () async {
+                      onPressed: ()  {
+                        fireStore.collection('kim').doc().set({
+                          'userName':name,
 
+                          'userPhone': phoneNum,
+                        });
                         UInfo _info =
                             UInfo(name, _selectedDate, phoneNum, type);
                         Get.offNamed("/first/login/signup/numberAuth",

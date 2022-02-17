@@ -42,9 +42,9 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
 
   Future<void> verifyPhoneNumber() async {
       await _auth.verifyPhoneNumber(
-          phoneNumber: '+821042082214',
+          phoneNumber: '+821000000000',
           verificationCompleted: (phoneAuthCredential) async{
-            print('문자를 받았음');
+            print("otp 문자옴");
           },
           codeSent: (verificationId, resendingToken){
             print('코드발송');
@@ -57,10 +57,10 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
             this.verificationId = verId;
           },
           verificationFailed: (verificationFailed) {
+            print(verificationFailed.code);
             print('fail');
           });
   }
-
 
   @override
   Widget build(BuildContext context) {
