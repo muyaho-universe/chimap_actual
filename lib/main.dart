@@ -10,6 +10,9 @@ import 'pages/PW_finding_page.dart';
 import 'pages/after_test_Pages/checking_time_page.dart';
 import 'pages/after_test_Pages/checking_time_page2.dart';
 import 'pages/after_test_Pages/kiadl_init_page.dart';
+import 'pages/after_test_Pages/on_gathering_page.dart';
+import 'pages/after_test_Pages/result_chimae_page.dart';
+import 'pages/after_test_Pages/result_normal_page.dart';
 import 'pages/after_test_Pages/tests_page.dart';
 import 'pages/complete_page.dart';
 import 'pages/finding_ID_info_page.dart';
@@ -135,8 +138,20 @@ class MyApp extends StatelessWidget {
           page: () => TestInitPage(),
         ),
         GetPage(
+          name: '/onGatheringPage',
+          page: () => OnGatheringPage(),
+        ),
+        GetPage(
           name: '/testInitPage/tests',
           page: () => TestsPage(),
+        ),
+        GetPage(
+          name: '/testInitPage/resultNormal',
+          page: () => ResultNomarlPage(),
+        ),
+        GetPage(
+          name: '/testInitPage/resultChimae',
+          page: () => ResultChimaePage(),
         ),
       ],
     );

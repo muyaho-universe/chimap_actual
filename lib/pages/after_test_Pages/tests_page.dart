@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:chimap_actual/utils/test_model.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:get/get.dart';
 
 class TestsPage extends StatefulWidget {
   const TestsPage({Key? key}) : super(key: key);
@@ -2533,9 +2534,9 @@ class _TestsPageState extends State<TestsPage> {
                           print(sum);
                           double avg = sum / count;
                           if (avg >= 0.47) {
-                            print('치매 $avg');
+                            Get.offNamed('/testInitPage/resultChimae');
                           } else {
-                            print('안심하세요 $avg');
+                            Get.offNamed('/testInitPage/resultNormal');
                           }
                         },
                         child: const Text(

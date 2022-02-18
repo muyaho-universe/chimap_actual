@@ -29,15 +29,14 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
   );
 
   DateTime _selectedDate = DateTime.now();
-  String name="";
+  String name = "";
   int currentPage = 0;
-  String phoneNum="";
+  String phoneNum = "";
   var type = Get.arguments;
-  bool _isNameEmpty = false;
+  bool _isNameEmpty = true;
   bool _isPhoneNumEmpty = true;
   late QuerySnapshot querySnapshot;
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
-  
 
   String _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -123,8 +122,9 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                           decoration: InputDecoration(
                             hintText: '이름을 입력해주세요.',
                           ),
-                          onChanged: (value){
+                          onChanged: (value) {
                             setState(() {
+                              _isNameEmpty = false;
                               name = _signUpUserNameController.text;
                             });
                           },
@@ -174,114 +174,78 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                         //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        primary: Color(0xFFFFBD9D),
+                        primary: _isNameEmpty? Color(0xFFC4C4C4) : Color(0xFFFFBD9D),
                       ),
-                      onPressed: () {
-                        if (name!.trim().isEmpty) {
-                          showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    '이름을 입력해주세요!',
-                                    style: TextStyle(
-                                      fontFamily: "Gosan",
-                                      fontSize: 24.0,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  content: SingleChildScrollView(
-                                    child: ListBody(children: <Widget>[
-                                      Text(
-                                        '이름이 비어있습니다!',
+                      onPressed: _isNameEmpty
+                          ? null
+                          : () {
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        '이름이 맞으신가요?',
                                         style: TextStyle(
                                           fontFamily: "Gosan",
-                                          fontSize: 18.0,
+                                          fontSize: 24.0,
                                           color: Colors.black,
                                         ),
                                       ),
-                                    ]),
-                                  ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('예'),
-                                    ),
-                                  ],
-                                );
-                              });
-                        } else {
-                          showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    '이름이 맞으신가요?',
-                                    style: TextStyle(
-                                      fontFamily: "Gosan",
-                                      fontSize: 24.0,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  content: SingleChildScrollView(
-                                    child: ListBody(children: <Widget>[
-                                      Row(
-                                        children: [
+                                      content: SingleChildScrollView(
+                                        child: ListBody(children: <Widget>[
+                                          Row(
+                                            children: [
+                                              Text(
+                                                '성함: ',
+                                                style: TextStyle(
+                                                  fontFamily: "Gosan",
+                                                  fontSize: 18.0,
+                                                  color: Colors.black87,
+                                                ),
+                                              ),
+                                              Text(
+                                                '$name',
+                                                style: TextStyle(
+                                                  fontFamily: "Gosan",
+                                                  fontSize: 18.0,
+                                                  color: Color(0xFF6A74CF),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 15.0,
+                                          ),
                                           Text(
-                                            '성함: ',
+                                            '맞으시면 "예"를 눌러주세요',
                                             style: TextStyle(
                                               fontFamily: "Gosan",
                                               fontSize: 18.0,
                                               color: Colors.black87,
                                             ),
                                           ),
-                                          Text(
-                                            '$name',
-                                            style: TextStyle(
-                                              fontFamily: "Gosan",
-                                              fontSize: 18.0,
-                                              color: Color(0xFF6A74CF),
-                                            ),
-                                          ),
-                                        ],
+                                        ]),
                                       ),
-                                      SizedBox(
-                                        height: 15.0,
-                                      ),
-                                      Text(
-                                        '맞으시면 "예"를 눌러주세요',
-                                        style: TextStyle(
-                                          fontFamily: "Gosan",
-                                          fontSize: 18.0,
-                                          color: Colors.black87,
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('아니오'),
                                         ),
-                                      ),
-                                    ]),
-                                  ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('아니오'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        currentPage++;
-                                        controller.jumpToPage(currentPage);
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('예'),
-                                    ),
-                                  ],
-                                );
-                              });
-                        }
-                      },
+                                        TextButton(
+                                          onPressed: () async {
+                                            currentPage++;
+                                            controller.jumpToPage(currentPage);
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('예'),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
                       child: const Text(
                         '다음',
                         style: TextStyle(
@@ -583,15 +547,9 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                           decoration: InputDecoration(
                             hintText: '-를 빼고 번호만 입력해주세요.',
                           ),
-                          validator: (value) {
-                            if (value!.trim().isEmpty) {
-                              return '전화번호를 입력하세요.';
-                            } else {
-                              return null;
-                            }
-                          },
-                          onChanged: (value){
+                          onChanged: (value) {
                             setState(() {
+                              _isPhoneNumEmpty = false;
                               phoneNum = _signUpUserPhoneNumController.text;
                             });
                           },
@@ -644,46 +602,9 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                         //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        primary: Color(0xFFFFBD9D),
+                        primary: _isPhoneNumEmpty? Color(0xFFC4C4C4) : Color(0xFFFFBD9D),
                       ),
-                      onPressed: () {
-                        if (phoneNum!.trim().isEmpty) {
-                          showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    '전화번호를 입력해주세요!',
-                                    style: TextStyle(
-                                      fontFamily: "Gosan",
-                                      fontSize: 24.0,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  content: SingleChildScrollView(
-                                    child: ListBody(children: <Widget>[
-                                      Text(
-                                        '전화번호가 비어있습니다!',
-                                        style: TextStyle(
-                                          fontFamily: "Gosan",
-                                          fontSize: 18.0,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ]),
-                                  ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('예'),
-                                    ),
-                                  ],
-                                );
-                              });
-                        } else {
+                      onPressed: _isPhoneNumEmpty? null:() {
                           showDialog(
                               context: context,
                               barrierDismissible: false,
@@ -750,7 +671,7 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                                   ],
                                 );
                               });
-                        }
+
                       },
                       child: const Text(
                         '다음',
@@ -856,11 +777,10 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                             borderRadius: BorderRadius.circular(10)),
                         primary: Color(0xFFFFBD9D),
                       ),
-                      onPressed: ()  {
-                        fireStore.collection('kim').doc().set({
-                          'userName':name,
-
-                          'userPhone': phoneNum,
+                      onPressed: () {
+                        fireStore.collection('Kim').doc().set({
+                          "userName": "name",
+                          "userPhone": "phoneNum",
                         });
                         UInfo _info =
                             UInfo(name, _selectedDate, phoneNum, type);

@@ -29,6 +29,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
   late var mapUrl =
       'http://www.juso.go.kr/addrlink/addrLinkApi.do?confirmKey=devU01TX0FVVEgyMDIyMDIwNzE2NDk0NzExMjIxNDk=';
   late CollectionReference database;
+  var result;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,6 @@ class _IDandPWPageState extends State<IDandPWPage> {
 
   _bodyWidget() {
     List<bool> isSelected = List.generate(2, (index) => false);
-    var result;
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Form(
@@ -290,6 +290,8 @@ class _IDandPWPageState extends State<IDandPWPage> {
                 SizedBox(
                   height: 5,
                 ),
+                Text("$type"),
+
                 ElevatedButton(
                   child: Text(
                     '우편주소검색',
@@ -301,9 +303,10 @@ class _IDandPWPageState extends State<IDandPWPage> {
                   ),
                   onPressed: () async {
                     Get.toNamed('/first/login/locationSearch');
+
                   },
                 ),
-                Text("$result"),
+
                 SizedBox(
                   height: 15,
                 ),

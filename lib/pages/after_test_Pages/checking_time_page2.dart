@@ -16,32 +16,27 @@ class _TimeSettingPage2 extends State<TimeSettingPage2> {
 
   var time = Get.arguments;
 
-  String hourText(){
-    if(time == null ) {
+  String hourText() {
+    if (time == null) {
       return '시간을 선택해 주세요!';
-    }
-    else{
+    } else {
       final hours;
       final minutes;
-      if(time.hour>=13){
-        hours = (time.hour-12).toString().padLeft(2,'0');
-        minutes = time.minute.toString().padLeft(2,'0');
-        return'오후 $hours시 $minutes분';
-      }
-      else if(time.hour==12){
-        hours = time.hour.toString().padLeft(2,'0');
-        minutes = time.minute.toString().padLeft(2,'0');
-        return'오후 $hours시 $minutes분';
-      }
-      else{
-        hours = time.hour.toString().padLeft(2,'0');
-        minutes = time.minute.toString().padLeft(2,'0');
-        return'오전 $hours시 $minutes분';
+      if (time.hour >= 13) {
+        hours = (time.hour - 12).toString().padLeft(2, '0');
+        minutes = time.minute.toString().padLeft(2, '0');
+        return '오후 $hours시 $minutes분';
+      } else if (time.hour == 12) {
+        hours = time.hour.toString().padLeft(2, '0');
+        minutes = time.minute.toString().padLeft(2, '0');
+        return '오후 $hours시 $minutes분';
+      } else {
+        hours = time.hour.toString().padLeft(2, '0');
+        minutes = time.minute.toString().padLeft(2, '0');
+        return '오전 $hours시 $minutes분';
       }
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -82,27 +77,31 @@ class _TimeSettingPage2 extends State<TimeSettingPage2> {
                       fontFamily: "Gosan",
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0,
-                      color:Color(0xFF000000),
+                      color: Color(0xFF000000),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '${DateFormat('yyyy').format(dateTime1)}.${dateTime1.month}.${dateTime1.day} ' +hourText() +'\n',
+                        '${DateFormat('yyyy').format(dateTime1)}.${dateTime1.month}.${dateTime1.day} ' +
+                            hourText() +
+                            '\n',
                         style: TextStyle(
                           fontFamily: "Gosan",
                           fontWeight: FontWeight.bold,
                           fontSize: 25.0,
-                          color:Color(0xFF6A74CF),
+                          color: Color(0xFF6A74CF),
                         ),
                       ),
-                      Text(' 에\n',
+                      Text(
+                        ' 에\n',
                         style: TextStyle(
                           fontFamily: "Gosan",
                           fontWeight: FontWeight.bold,
                           fontSize: 25.0,
-                        ),),
+                        ),
+                      ),
                     ],
                   ),
                   Text(
@@ -111,24 +110,25 @@ class _TimeSettingPage2 extends State<TimeSettingPage2> {
                       fontFamily: "Gosan",
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0,
-                      color:Color(0xFF000000),
+                      color: Color(0xFF000000),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-        ElevatedButton(
-        style: ElevatedButton.styleFrom(
-        //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-        shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10)),
-    primary: Color(0xFFFFBD9D),
-    ),
-    onPressed: () {
-          Get.toNamed('/testInitPage');
-    },
-        child: Text('임시'),)
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              primary: Color(0xFFFFBD9D),
+            ),
+            onPressed: () {
+              Get.toNamed('/onGatheringPage');
+            },
+            child: Text('임시'),
+          )
         ],
       ),
     );
