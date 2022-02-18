@@ -778,9 +778,11 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                         primary: Color(0xFFFFBD9D),
                       ),
                       onPressed: () {
-                        fireStore.collection('Kim').doc().set({
-                          "userName": "name",
-                          "userPhone": "phoneNum",
+                        fireStore.collection('user').doc().set({
+                          "userName": name,
+                          "userPhone": phoneNum,
+                          'userType': type,
+                          'birthDay': _selectedDate,
                         });
                         UInfo _info =
                             UInfo(name, _selectedDate, phoneNum, type);

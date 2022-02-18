@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OnGatheringPage extends StatelessWidget {
   const OnGatheringPage({Key? key}) : super(key: key);
@@ -54,7 +55,32 @@ class OnGatheringPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 25.0,
                 color: Color(0xFF000000),
-              ),)
+              ),),
+            SizedBox(height:30),
+            Container(
+              width: 256,
+              height: 70,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  primary: Color(0xEBFFBD9D),
+                ),
+                onPressed: () {
+                  Get.toNamed('/testInitPage');
+                },
+                icon: Icon(Icons.check),
+                label: Text(
+                  '검사하기',
+                  style: TextStyle(
+                    fontFamily: "Gosan",
+                    fontSize: 25.0,
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

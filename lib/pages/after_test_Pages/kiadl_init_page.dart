@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:get/get.dart';
 
 class TestInitPage extends StatelessWidget {
   TestInitPage({Key? key}) : super(key: key);
@@ -95,7 +96,34 @@ class TestInitPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   primary: Color(0xEBFFBD9D),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Container(
+                    width: 256.0,
+                    height: 71.0,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                          backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.9))),
+                      onPressed: () {
+                        Get.toNamed('/testInitPage/tests');
+                      },
+                      child: const Text(
+                        '검사하기',
+                        style: TextStyle(
+                          fontFamily: "Gosan",
+                          fontSize: 28.0,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  );
+                },
                 icon: Icon(Icons.check),
                 label: Text(
                   '확인',

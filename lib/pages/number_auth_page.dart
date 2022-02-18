@@ -42,7 +42,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
 
   Future<void> verifyPhoneNumber() async {
       await _auth.verifyPhoneNumber(
-          phoneNumber: '+821000000000',
+          phoneNumber: '+821042082214',
           verificationCompleted: (phoneAuthCredential) async{
             print("otp 문자옴");
           },
@@ -215,6 +215,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
                   ),
                   OutlinedButton(
                     onPressed: () async {
+
                     },
                     child: Text('인증하기'),
                   ),

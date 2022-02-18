@@ -127,7 +127,13 @@ class _TimeSettingPage2 extends State<TimeSettingPage2> {
             onPressed: () {
               Get.toNamed('/onGatheringPage');
             },
-            child: Text('임시'),
+            child: Text('임시',
+              style: TextStyle(
+                fontFamily: "Gosan",
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0,
+              ),
+            ),
           )
         ],
       ),

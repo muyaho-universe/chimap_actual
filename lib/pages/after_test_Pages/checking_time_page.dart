@@ -122,27 +122,20 @@ class _TimeSettingPage1 extends State<TimeSettingPage1> {
                     ],
                   ),
                   SizedBox(height: 15.0),
-                  ElevatedButton(
+                  ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       primary: Color(0xEBFFBD9D),
                     ),
-                    child: Container(
+                    icon: Icon(Icons.alarm),
+                    label: Container(
                       color: Color(0xEBFFBD9D),
                       width: 175,
                       height: 40,
                       child: Row(
                         children: <Widget>[
-                          Container(
-                            width: 20,
-                            height: 20,
-                            color: Color(0xEBFFBD9D),
-                            child: Image.asset(
-                              'asset/images/clock.png',
-                            ),
-                          ),
                           SizedBox(
                             width: 15,
                           ),
