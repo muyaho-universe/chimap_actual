@@ -97,36 +97,11 @@ class TestInitPage extends StatelessWidget {
                   primary: Color(0xEBFFBD9D),
                 ),
                 onPressed: () {
-                  Container(
-                    width: 256.0,
-                    height: 71.0,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.9))),
-                      onPressed: () {
-                        Get.toNamed('/testInitPage/tests');
-                      },
-                      child: const Text(
-                        '검사하기',
-                        style: TextStyle(
-                          fontFamily: "Gosan",
-                          fontSize: 28.0,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ),
-                  );
+                  Get.toNamed('/testInitPage/tests');
                 },
                 icon: Icon(Icons.check),
                 label: Text(
-                  '확인',
+                  '검사하기',
                   style: TextStyle(
                     fontFamily: "Gosan",
                     fontSize: 25.0,
