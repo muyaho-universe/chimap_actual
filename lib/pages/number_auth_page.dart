@@ -33,12 +33,50 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
   bool authOk = false; //- 폰인증이 정상적으로 완료됐는지 안됐는지 여부
   bool requestedAuth =
       false; //- 폰인증 요청을 보냈는지 여부. 인증 코드(OTP 6자리) 를 칠 수 있는 컨테이너의 visible 결정
-  String? verificationId; //-폰인증 시 생성되는 값
+  late String verificationId; //-폰인증 시 생성되는 값
   bool showLoading = false; //폰인증 보낼 때와 로그인할 때 완료될 때까지 뺑뺑이 화면 보일 수 있도록 하는 장치
   String? smsOTP;
   String errorMessage = '';
 
   FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void signInWithPhoneAuthCredential(PhoneAuthCredential phoneAuthCredential) async {
+    setState(() {
+      showLoading = true;
+    });
+    try {
+      final authCredential = await _auth.signInWithCredential(phoneAuthCredential);
+      setState(() {
+        showLoading = false;
+      });
+      if(authCredential?.user != null){
+        setState(() {
+          print("인증완료 및 로그인성공");
+          authOk=true;
+          requestedAuth=false;
+        });
+        await _auth.currentUser?.delete();
+        print("auth정보삭제");
+        _auth.signOut();
+        print("phone로그인된것 로그아웃");
+      }
+
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        print("인증실패..로그인실패");
+        showLoading = false;
+      });
+
+      await Fluttertoast.showToast(
+          msg: '저런',
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          fontSize: 16.0
+      );
+
+    }
+  }
 
   Future<void> verifyPhoneNumber() async {
       await _auth.verifyPhoneNumber(
@@ -51,10 +89,10 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
           },
           // WHEN CODE SENT THEN WE OPEN DIALOG TO ENTER OTP.
           timeout: const Duration(seconds: 60),
-          codeAutoRetrievalTimeout: (String verId) {
+          codeAutoRetrievalTimeout: (String verificationId) {
             //Starts the phone number verification process for the given phone number.
             //Either sends an SMS with a 6 digit code to the phone number specified, or sign's the user in and [verificationCompleted] is called.
-            this.verificationId = verId;
+            this.verificationId = verificationId;
           },
           verificationFailed: (verificationFailed) {
             print(verificationFailed.code);
@@ -215,7 +253,11 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
                   ),
                   OutlinedButton(
                     onPressed: () async {
+                      PhoneAuthCredential phoneAuthCredential =
+                      PhoneAuthProvider.credential(
+                          verificationId: verificationId, smsCode: _authNumberController.text);
 
+                      signInWithPhoneAuthCredential(phoneAuthCredential);
                     },
                     child: Text('인증하기'),
                   ),
