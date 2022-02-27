@@ -1,16 +1,15 @@
-# chimap_actual
+# ChiMap   
+### |map for Alzheimer|
+----------------------------
 
-A new Flutter project.
+1. 프로젝트 소개   
+  치매를 초기 단계에서 발견하기 위한 어플
+  K-IADL 방법을 바탕으로 한 치매 진단 어플
 
-## Getting Started
+2. 프로젝트 개발 배경   
+  치매 초기 단계에 환자는 자신이 치매인지도 잘 인지 하지 못하고, 병원에 가보는것도 거부해서 빠르게 조치하기가 어렵다. 따라서 우리는 핸드폰을 이용해서 치매를 초기에 발견하고 빠른 조치를 취할 수 있게 어플을 만들었다. 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. 주요 기능   
+  * 로그인, 회원 가입, 보호자와 대상자의 연동
+  * gps를 이용한 자동 치매 진단
+  * K-IADL을 이용한 치매 진단
