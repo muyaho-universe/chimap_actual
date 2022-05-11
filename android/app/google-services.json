@@ -14,14 +14,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "136812715657-f8cuo38emccc20fknd67qbggh5rj0e37.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.chimap_actual",
-            "certificate_hash": "a7a90a31d6e40dede30de7075bd5d428b28c9b9d"
-          }
-        },
-        {
           "client_id": "136812715657-9b63b0uhqmfnp3sn3lp91g2f2lktqfge.apps.googleusercontent.com",
           "client_type": 3
         }
