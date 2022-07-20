@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:chimap_actual/pages/first_page.dart';
 import 'package:chimap_actual/pages/login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,15 +28,27 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        if(snapshot.hasError){
+          return const Center(
+            child: Text("firebase load failed"),
+          );
+        }
+
+        return GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: Scaffold(
+            backgroundColor: const Color(0xFFFFCAB0),
+            body: _bodyWidget(),
+          ),
+        );
       },
-      child: Scaffold(
-        backgroundColor: const Color(0xFFFFCAB0),
-        body: _bodyWidget(),
-      ),
     );
+
   }
 
   _bodyWidget() {

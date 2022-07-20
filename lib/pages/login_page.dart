@@ -27,7 +27,8 @@ class LoginPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('치맵',
+          title: Text(
+            '치맵',
             style: TextStyle(
               fontFamily: "Gosan",
               fontSize: 28.0,
@@ -35,7 +36,8 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           backgroundColor: const Color(0xFFFFCAB0),
-          centerTitle: true, // 중앙 정렬
+          centerTitle: true,
+          // 중앙 정렬
           elevation: 0.0,
           leading: IconButton(
             icon: Icon(Icons.home), // 햄버거버튼 아이콘 생성
