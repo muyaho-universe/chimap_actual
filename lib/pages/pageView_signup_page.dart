@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:multi_masked_formatter/multi_masked_formatter.dart';
 import 'package:chimap_actual/utils/user_info.dart';
 
 class PageViweSignUpPage extends StatefulWidget {
@@ -538,11 +537,7 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                         height: 60,
                         child: TextFormField(
                           controller: _signUpUserPhoneNumController,
-                          inputFormatters: [
-                            MultiMaskedTextInputFormatter(
-                                masks: ['xxx-xxxx-xxxx', 'xxx-xxx-xxxx'],
-                                separator: '-')
-                          ],
+
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: '-를 빼고 번호만 입력해주세요.',

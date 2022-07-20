@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "136812715657",
-    "project_id": "chimap-actual",
-    "storage_bucket": "chimap-actual.appspot.com"
+    "project_number": "1078921418203",
+    "project_id": "chimap-6fb1a",
+    "storage_bucket": "chimap-6fb1a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:136812715657:android:93964e516bca01f138b058",
+        "mobilesdk_app_id": "1:1078921418203:android:2ada810606bc2b2a8043fe",
         "android_client_info": {
           "package_name": "com.example.chimap_actual"
         }
       },
       "oauth_client": [
         {
-          "client_id": "136812715657-9b63b0uhqmfnp3sn3lp91g2f2lktqfge.apps.googleusercontent.com",
+          "client_id": "1078921418203-nm6il1l8pb7uprierqeaq3rfk54575k3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chimap_actual",
+            "certificate_hash": "76200fa774dd168a3685f732478e9934b8032976"
+          }
+        },
+        {
+          "client_id": "1078921418203-l5j7cfoiktqqaag089u6dmrnoioa05l1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyARHUdnPCJQHhScm3JhIr-yo9WAaJLOqvY"
+          "current_key": "AIzaSyDh7yN3bXiFeqs2NtwAZLZNlojil4VTJts"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "136812715657-9b63b0uhqmfnp3sn3lp91g2f2lktqfge.apps.googleusercontent.com",
+              "client_id": "1078921418203-l5j7cfoiktqqaag089u6dmrnoioa05l1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -2,7 +2,7 @@ import 'package:chimap_actual/utils/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:multi_masked_formatter/multi_masked_formatter.dart';
+
 
 class IDFindingPage extends StatefulWidget {
   IDFindingPage({Key? key}) : super(key: key);
@@ -132,11 +132,6 @@ class _IDFindingPageState extends State<IDFindingPage> {
                   height: 60,
                   child: TextFormField(
                     controller: _findingNumberController,
-                    inputFormatters: [
-                      MultiMaskedTextInputFormatter(
-                          masks: ['xxx-xxxx-xxxx', 'xxx-xxx-xxxx'],
-                          separator: '-')
-                    ],
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
