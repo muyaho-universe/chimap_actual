@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,9 @@ class LoginPage extends StatelessWidget {
 
   final TextEditingController _loginIDController = TextEditingController();
   final TextEditingController _loginPWController = TextEditingController();
+
+  CollectionReference database = FirebaseFirestore.instance.collection('user');
+  late QuerySnapshot querySnapshot;
 
   var _num = 22.0;
 
@@ -142,7 +146,7 @@ class LoginPage extends StatelessWidget {
                       onPressed: () async {
                         if (_loginFormKey.currentState!.validate()) {
                           loginController.loging();
-                          _emailLogin();
+                          _idLogin();
                         }
                       },
                       child: !loginController.isLoging.value
@@ -231,20 +235,53 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Future<void> _emailLogin() async {
-    try {
-      User? user = await Authentication.signInWithEmailAndPassword(
-          _loginIDController.text, _loginPWController.text);
-      if (user != null) {
-        Get.toNamed('/first/login/timesetPage1');
-      } else {
-        loginController.notLoging();
+  Future<void> _idLogin() async{
+
+
+    if (!_loginIDController.text.isEmpty) {
+      int i;
+      querySnapshot = await database.get();
+
+      for (i = 0; i < querySnapshot.docs.length; i++) {
+        var a = querySnapshot.docs[i];
+
+        if (a.get('uid') ==  _loginIDController.text) {
+          if(a.get('password') == _loginPWController.text){
+            loginController.loging();
+            Get.toNamed('/first/login/timesetPage1');
+          }
+          else{
+            loginController.notLoging();
+          }
+        }
       }
-    } catch (e) {
-      loginController.notLoging();
-      print('email login failed');
-      print(e.toString());
+
+      // if (i == (querySnapshot.docs.length)) {
+      //   database.doc(user.uid).set({
+      //     'email': user.email.toString(),
+      //     'name': user.displayName.toString(),
+      //     'uid': user.uid,
+      //   });
+      // }
+
+        // Get.to();
     }
+  }
+
+  Future<void> _emailLogin() async {
+    // try {
+    //   User? user = await Authentication.signInWithEmailAndPassword(
+    //       _loginIDController.text, _loginPWController.text);
+    //   if (user != null) {
+    //     Get.toNamed('/first/login/timesetPage1');
+    //   } else {
+    //     loginController.notLoging();
+    //   }
+    // } catch (e) {
+    //   loginController.notLoging();
+    //   print('email login failed');
+    //   print(e.toString());
+    // }
   }
 }
 
