@@ -80,7 +80,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
 
   Future<void> verifyPhoneNumber() async {
       await _auth.verifyPhoneNumber(
-          phoneNumber: '+821042082214',
+          phoneNumber: '+821012341234',
           verificationCompleted: (phoneAuthCredential) async{
             print("otp 문자옴");
           },

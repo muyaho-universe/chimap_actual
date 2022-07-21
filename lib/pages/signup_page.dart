@@ -1,3 +1,5 @@
+import 'package:chimap_actual/utils/user_info.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +13,8 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late int type;
+  UInfo uInfo = UInfo();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -112,8 +116,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                 TextButton(
                                   onPressed: () {
                                     type = 1;
+                                    uInfo.setType(type);
                                     Get.toNamed("/first/login/signup/viewST",
-                                        arguments: type);
+                                        arguments: uInfo);
                                   },
                                   child: Text('예'),
                                 ),
@@ -192,8 +197,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                 TextButton(
                                   onPressed: () {
                                     type = 2;
+                                    uInfo.setType(type);
                                     Get.toNamed("/first/login/signup/viewST",
-                                        arguments: type);
+                                        arguments: uInfo);
                                   },
                                   child: Text('예'),
                                 ),
@@ -272,8 +278,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                 TextButton(
                                   onPressed: () {
                                     type = 3;
+                                    uInfo.setType(type);
                                     Get.toNamed("/first/login/signup/viewST",
-                                        arguments: type);
+                                        arguments: uInfo);
                                   },
                                   child: Text('예'),
                                 ),

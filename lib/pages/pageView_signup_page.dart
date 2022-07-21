@@ -31,7 +31,7 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
   String name = "";
   int currentPage = 0;
   String phoneNum = "";
-  var type = Get.arguments;
+  UInfo uInfo = Get.arguments;
   bool _isNameEmpty = true;
   bool _isPhoneNumEmpty = true;
   late QuerySnapshot querySnapshot;
@@ -235,6 +235,7 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                                         ),
                                         TextButton(
                                           onPressed: () async {
+                                            uInfo.setUserName(name);
                                             currentPage++;
                                             controller.jumpToPage(currentPage);
                                             Navigator.of(context).pop();
@@ -472,6 +473,7 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                                   ),
                                   TextButton(
                                     onPressed: () {
+                                      uInfo.setBirthdy(_selectedDate);
                                       currentPage++;
                                       controller.jumpToPage(currentPage);
                                       Navigator.of(context).pop();
@@ -657,6 +659,7 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                                     ),
                                     TextButton(
                                       onPressed: () {
+                                        uInfo.setPhoneNumber(phoneNum);
                                         currentPage++;
                                         controller.jumpToPage(currentPage);
                                         Navigator.of(context).pop();
@@ -773,16 +776,9 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                         primary: Color(0xFFFFBD9D),
                       ),
                       onPressed: () {
-                        fireStore.collection('user').doc().set({
-                          "userName": name,
-                          "userPhone": phoneNum,
-                          'userType': type,
-                          'birthDay': _selectedDate,
-                        });
-                        UInfo _info;
                             // UInfo(name, _selectedDate, phoneNum, type);
-                        // Get.offNamed("/first/login/signup/numberAuth",
-                        //     arguments: _info);
+                        Get.offNamed("/first/login/signup/numberAuth",
+                            arguments: uInfo);
                       },
                       child: const Text(
                         '다음',
