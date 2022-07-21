@@ -779,10 +779,10 @@ class _PageViweSignUpPageState extends State<PageViweSignUpPage> {
                           'userType': type,
                           'birthDay': _selectedDate,
                         });
-                        UInfo _info =
-                            UInfo(name, _selectedDate, phoneNum, type);
-                        Get.offNamed("/first/login/signup/numberAuth",
-                            arguments: _info);
+                        UInfo _info;
+                            // UInfo(name, _selectedDate, phoneNum, type);
+                        // Get.offNamed("/first/login/signup/numberAuth",
+                        //     arguments: _info);
                       },
                       child: const Text(
                         '다음',
