@@ -5,6 +5,7 @@ class UInfo {
   late DateTime birthDay;
   String userPhoneNum = "";
   int userType = -1;
+  bool auth =false;
 
   void setUserName(String name){
     userName = name;
@@ -20,5 +21,9 @@ class UInfo {
 
   void setType(int type){
     userType = type;
+  }
+
+  void setAuth(bool auth){
+    this.auth = auth;
   }
 }

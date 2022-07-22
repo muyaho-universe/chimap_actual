@@ -98,6 +98,7 @@ class FirstPage extends StatelessWidget {
             child: const Text(
               '회원가입',
               style: TextStyle(
+
                 fontFamily: "Gosan",
                 fontSize: 28.0,
                 color: Colors.black87,

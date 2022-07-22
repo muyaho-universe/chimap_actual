@@ -17,7 +17,6 @@ class NumberAuthPage extends StatefulWidget {
 
 class _NumberAuthPageState extends State<NumberAuthPage> {
 
-
   final _AuthFormKey = GlobalKey<FormState>();
   // final userController = Get.put(UserController());
   final SmsAutoFill _autoFill = SmsAutoFill();
@@ -25,7 +24,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
   UInfo _info = Get.arguments;
 
   late var _number = _info.userPhoneNum;
-
+  late String phoneNumber = "+82"+_info.userPhoneNum.substring(1);
   final TextEditingController _authNumberController = TextEditingController();
 
   final FocusNode otpFocusNode = FocusNode();
@@ -54,6 +53,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
           print("인증완료 및 로그인성공");
           authOk=true;
           requestedAuth=false;
+          _info.setAuth(true);
         });
         await _auth.currentUser?.delete();
         print("auth정보삭제");
@@ -80,7 +80,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
 
   Future<void> verifyPhoneNumber() async {
       await _auth.verifyPhoneNumber(
-          phoneNumber: '+821012341234',
+          phoneNumber: phoneNumber,
           verificationCompleted: (phoneAuthCredential) async{
             print("otp 문자옴");
           },
