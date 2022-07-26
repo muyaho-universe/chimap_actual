@@ -32,6 +32,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
       'http://www.juso.go.kr/addrlink/addrLinkApi.do?confirmKey=devU01TX0FVVEgyMDIyMDIwNzE2NDk0NzExMjIxNDk=';
   var result;
   late String id;
+  String _message = "";
 
   CollectionReference database = FirebaseFirestore.instance.collection('user');
   late QuerySnapshot querySnapshot;
@@ -115,6 +116,9 @@ class _IDandPWPageState extends State<IDandPWPage> {
                         color: Colors.black87,
                       ),
                     ),
+                    Text(
+                      _message,
+                    )
                   ],
                 ),
                 SizedBox(
@@ -140,12 +144,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                             info.setID(id);
                           });
                         },
-                        validator: (value){
-                          if(_isIDCheked == 1){
-                            return "존재하는 아이디 입니다!";
-                          }
-                          return null;
-                        },
+
                       ),
                     ),
                     SizedBox(
@@ -163,11 +162,14 @@ class _IDandPWPageState extends State<IDandPWPage> {
                             var a = querySnapshot.docs[i];
                             if (a.get('uid') ==  _signUpIDController.text) {
                               _isIDCheked =  1;
+                              _message = "존재합니다";
                               print("존재합니다");
                               break;
                             }
+                            _message="사용가능합니다.";
                           }
                           print("끝");
+                          build(context);
                         },
                         child: Text(
                           "중복검사",
