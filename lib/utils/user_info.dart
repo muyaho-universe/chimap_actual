@@ -6,6 +6,10 @@ class UInfo {
   String userPhoneNum = "";
   int userType = -1;
   bool auth =false;
+  String address = "";
+  String id = "";
+  String password = "";
+  String gender = "";
 
   void setUserName(String name){
     userName = name;
@@ -25,5 +29,21 @@ class UInfo {
 
   void setAuth(bool auth){
     this.auth = auth;
+  }
+
+  void setAddress(String address){
+    this.address = address;
+  }
+
+  void setID(String id){
+    this.id = id;
+  }
+
+  void setPassword(String password){
+    this.password = password;
+  }
+
+  void setGender(String gender){
+    this.gender = gender;
   }
 }

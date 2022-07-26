@@ -81,14 +81,16 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
   Future<void> verifyPhoneNumber() async {
       await _auth.verifyPhoneNumber(
           phoneNumber: phoneNumber,
+
           verificationCompleted: (phoneAuthCredential) async{
             print("otp 문자옴");
           },
           codeSent: (verificationId, resendingToken){
             print('코드발송');
+            this.verificationId = verificationId;
           },
           // WHEN CODE SENT THEN WE OPEN DIALOG TO ENTER OTP.
-          timeout: const Duration(seconds: 60),
+          timeout: const Duration(seconds: 120),
           codeAutoRetrievalTimeout: (String verificationId) {
             //Starts the phone number verification process for the given phone number.
             //Either sends an SMS with a 6 digit code to the phone number specified, or sign's the user in and [verificationCompleted] is called.
@@ -187,6 +189,7 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
                       primary: Color(0xFFFFBD9D),
                     ),
                     onPressed: () {
+                      authOk = false;
                       showDialog(
                         context: context,
                         barrierDismissible: false,
@@ -271,22 +274,24 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
                       shape: BoxShape.circle,
                     ),
                     child: ElevatedButton(
+
                       style: ElevatedButton.styleFrom(
                         //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        primary: Color(0xFFFFBD9D),
+                        primary: authOk? Color(0xFFFFBD9D) : Color(0xFFC4C4C4),
                       ),
-                      onPressed: () {
+                      onPressed:authOk? () {
                         if (_info.userType == 100) {
                           Get.offNamed("/first/login/findingIDinfo");
                         } else if (_info.userType == 101) {
                           Get.offNamed("/first/login/resetPW");
                         } else {
+                          _info.setAuth(authOk);
                           Get.offNamed("first/login/signup/IDandPW",
-                              arguments: _info.userType);
+                              arguments: _info);
                         } //ShowDialog
-                      },
+                      } : null,
                       child: const Text(
                         '다음',
                         style: TextStyle(

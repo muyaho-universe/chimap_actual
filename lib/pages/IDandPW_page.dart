@@ -1,4 +1,5 @@
 import 'package:chimap_actual/utils/user_controller.dart';
+import 'package:chimap_actual/utils/user_info.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,20 @@ class _IDandPWPageState extends State<IDandPWPage> {
   final TextEditingController _signUpPWController = TextEditingController();
   final TextEditingController _signUpPWConfirmController =
       TextEditingController();
-  var type = Get.arguments;
+  UInfo info = Get.arguments;
+  late String address = info.address;
   bool go = true;
   late Reference firebaseStorageRef;
   late var mapUrl =
       'http://www.juso.go.kr/addrlink/addrLinkApi.do?confirmKey=devU01TX0FVVEgyMDIyMDIwNzE2NDk0NzExMjIxNDk=';
-  late CollectionReference database;
   var result;
+  late String id;
+
+  CollectionReference database = FirebaseFirestore.instance.collection('user');
+  late QuerySnapshot querySnapshot;
+
+  bool _isIDEmpty = true;
+  int _isIDCheked = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +91,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                   height: 30,
                 ),
                 Text(
-                  '무야호',
+                  '',
                   style: TextStyle(
                     fontFamily: "Gosan",
                     fontSize: 15.0,
@@ -112,16 +120,66 @@ class _IDandPWPageState extends State<IDandPWPage> {
                 SizedBox(
                   height: 5,
                 ),
-                Container(
-                  width: 300,
-                  height: 60,
-                  child: TextFormField(
-                    controller: _signUpIDController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: '아이디를 입력해주세요.',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 200,
+                      height: 60,
+                      child: TextFormField(
+                        controller: _signUpIDController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: '아이디를 입력해주세요.',
+                        ),
+                        // initialValue: _isIDEmpty ? null : info.id,
+                        onChanged: (value) {
+                          setState(() {
+                            _isIDEmpty = false;
+                            id = _signUpIDController.text;
+                            info.setID(id);
+                          });
+                        },
+                        validator: (value){
+                          if(_isIDCheked == 1){
+                            return "존재하는 아이디 입니다!";
+                          }
+                          return null;
+                        },
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      width: 90,
+                      height: 60,
+                      child: ElevatedButton(
+                        onPressed: ()async{
+                          int i;
+                          querySnapshot = await database.get();
+
+                          for (i = 0; i < querySnapshot.docs.length; i++) {
+                            var a = querySnapshot.docs[i];
+                            if (a.get('uid') ==  _signUpIDController.text) {
+                              _isIDCheked =  1;
+                              print("존재합니다");
+                              break;
+                            }
+                          }
+                          print("끝");
+                        },
+                        child: Text(
+                          "중복검사",
+                          style: TextStyle(
+                            fontFamily: "Gosan",
+                            fontSize: 14.5,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      )
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 15,
@@ -290,7 +348,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                 SizedBox(
                   height: 5,
                 ),
-                Text("$type"),
+                Text("$address"),
 
                 ElevatedButton(
                   child: Text(
@@ -302,7 +360,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                     ),
                   ),
                   onPressed: () async {
-                    Get.toNamed('/first/login/locationSearch');
+                    Get.toNamed('/first/login/locationSearch', arguments: info);
 
                   },
                 ),
@@ -355,7 +413,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                         onPressed: () {
                           if (_signUpPWController.text ==
                               _signUpPWConfirmController.text) {
-                            if (type == 1) {
+                            if (info.userType == 1) {
                               Get.offNamed('/first/login/signup/partnerOnly');
                             } else {
                               Get.offNamed("/first/login/signup/complete");

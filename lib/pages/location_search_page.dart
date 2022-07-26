@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:chimap_actual/repository/location_search.dart';
 
+import '../utils/user_info.dart';
+
 
 
 class LocationSearchPage extends StatefulWidget {
@@ -23,7 +25,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
   late String keyword="", errorMessage = "검색어를 입력하세요.";
   late int page;
   late String ADD;
-
+  UInfo info = Get.arguments;
   final _locationFormKey = GlobalKey<FormState>();
   final TextEditingController _locataionController = TextEditingController();
 
@@ -260,9 +262,10 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
                     TextButton(
                       onPressed: () async {
                         setState(() {
+                          info.setAddress(address.roadAddr);
                           ADD = address.roadAddr;
                         });
-                        Get.offNamed("/first/login/signup/IDandPW", arguments: ADD);
+                        Get.offNamed("/first/login/signup/IDandPW", arguments: info);
                       },
                       child: Text('예'),
                     ),
