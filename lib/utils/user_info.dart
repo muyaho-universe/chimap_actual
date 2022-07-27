@@ -10,6 +10,7 @@ class UInfo {
   String id = "";
   String password = "";
   String gender = "";
+  bool idChecked =false;
 
   void setUserName(String name){
     userName = name;
@@ -45,5 +46,9 @@ class UInfo {
 
   void setGender(String gender){
     this.gender = gender;
+  }
+
+  void setIdCheck(bool check){
+    this.idChecked = check;
   }
 }

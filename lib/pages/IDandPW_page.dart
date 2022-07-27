@@ -33,12 +33,17 @@ class _IDandPWPageState extends State<IDandPWPage> {
   var result;
   late String id;
   String _message = "";
+  String _passwordLength = "";
+  String _passwordCheck = "";
+
+  bool _longPassword = false;
 
   CollectionReference database = FirebaseFirestore.instance.collection('user');
   late QuerySnapshot querySnapshot;
 
   bool _isIDEmpty = true;
   int _isIDCheked = 0;
+  bool _passwordChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +114,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       width: 38,
                     ),
                     Text(
-                      '아이디:',
+                      '아이디: ',
                       style: TextStyle(
                         fontFamily: "Gosan",
                         fontSize: 20.0,
@@ -118,6 +123,13 @@ class _IDandPWPageState extends State<IDandPWPage> {
                     ),
                     Text(
                       _message,
+                      style: TextStyle(
+                        fontFamily: "Gosan",
+                        fontSize: 20.0,
+                        color: _message == "존재합니다"
+                            ? Colors.redAccent
+                            : Colors.green,
+                      ),
                     )
                   ],
                 ),
@@ -144,7 +156,6 @@ class _IDandPWPageState extends State<IDandPWPage> {
                             info.setID(id);
                           });
                         },
-
                       ),
                     ),
                     SizedBox(
@@ -154,22 +165,27 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       width: 90,
                       height: 60,
                       child: ElevatedButton(
-                        onPressed: ()async{
+                        onPressed: () async {
                           int i;
                           querySnapshot = await database.get();
-
+                          String _temp = "";
                           for (i = 0; i < querySnapshot.docs.length; i++) {
                             var a = querySnapshot.docs[i];
-                            if (a.get('uid') ==  _signUpIDController.text) {
-                              _isIDCheked =  1;
-                              _message = "존재합니다";
+                            if (a.get('uid') == _signUpIDController.text) {
+                              _isIDCheked = 1;
+                              _temp = "존재합니다";
                               print("존재합니다");
+                              info.setIdCheck(false);
                               break;
                             }
-                            _message="사용가능합니다.";
+                            _temp = "사용가능합니다.";
+                            _isIDCheked = 2;
+                            info.setIdCheck(true);
                           }
-                          print("끝");
-                          build(context);
+
+                          setState(() {
+                            _message = _temp;
+                          });
                         },
                         child: Text(
                           "중복검사",
@@ -179,7 +195,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                             color: Colors.black87,
                           ),
                         ),
-                      )
+                      ),
                     ),
                   ],
                 ),
@@ -200,6 +216,9 @@ class _IDandPWPageState extends State<IDandPWPage> {
                         color: Colors.black87,
                       ),
                     ),
+                    Text(
+                      _passwordLength,
+                    )
                   ],
                 ),
                 SizedBox(
@@ -214,6 +233,31 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       border: OutlineInputBorder(),
                       hintText: '비밀번호를 입력해주세요.',
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        if (!value.isEmpty) {
+                          if (value.length < 6) {
+                            _passwordLength = "여섯 글자 이상 적어주세요!";
+                            _longPassword = false;
+                          } else {
+                            _longPassword = true;
+                            _passwordLength = "사용할 수 있습니다.";
+                            if (!_signUpPWConfirmController.text.isEmpty) {
+                              if (value == _signUpPWConfirmController.text) {
+                                _passwordCheck = "비밀번호가 일치합니다!";
+                                info.setPassword(_signUpPWConfirmController.text);
+                              } else {
+                                _passwordCheck = "비밀번호가 일치하지 않습니다.";
+                              }
+                            }
+                          }
+                        } else {
+                          _passwordCheck = "";
+                          _passwordLength = "";
+                          _longPassword = false;
+                        }
+                      });
+                    },
                   ),
                 ),
                 SizedBox(
@@ -226,11 +270,24 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       width: 38,
                     ),
                     Text(
-                      '비밀번호 확인:',
+                      '비밀번호 확인: ',
                       style: TextStyle(
                         fontFamily: "Gosan",
                         fontSize: 20.0,
                         color: Colors.black87,
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                      child: Text(
+                        _passwordCheck,
+                        style: TextStyle(
+                          fontFamily: "Gosan",
+                          fontSize: 15.0,
+                          color: _passwordCheck == "비밀번호가 일치하지 않습니다."
+                              ? Colors.redAccent
+                              : Colors.green,
+                        ),
                       ),
                     ),
                   ],
@@ -247,13 +304,21 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       border: OutlineInputBorder(),
                       hintText: '비밀번호를 다시 한번 입력해주세요.',
                     ),
-                    validator: (value) {
-                      if (value!.trim() != _signUpPWController.text) {
-                        return '비밀번호가 다릅니다.';
-                      } else {
-                        return null;
-                      }
+                    onChanged: (value) {
+                      setState(() {
+                        if (!value.isEmpty) {
+                          if (value == _signUpPWController.text) {
+                            _passwordCheck = "비밀번호가 일치합니다!";
+                            info.setPassword(_signUpPWConfirmController.text);
+                          } else {
+                            _passwordCheck = "비밀번호가 일치하지 않습니다.";
+                          }
+                        } else {
+                          _passwordCheck = "";
+                        }
+                      });
                     },
+                    readOnly: _longPassword ? false : true,
                   ),
                 ),
                 SizedBox(
@@ -351,7 +416,6 @@ class _IDandPWPageState extends State<IDandPWPage> {
                   height: 5,
                 ),
                 Text("$address"),
-
                 ElevatedButton(
                   child: Text(
                     '우편주소검색',
@@ -363,10 +427,8 @@ class _IDandPWPageState extends State<IDandPWPage> {
                   ),
                   onPressed: () async {
                     Get.toNamed('/first/login/locationSearch', arguments: info);
-
                   },
                 ),
-
                 SizedBox(
                   height: 15,
                 ),
@@ -420,46 +482,10 @@ class _IDandPWPageState extends State<IDandPWPage> {
                             } else {
                               Get.offNamed("/first/login/signup/complete");
                             }
-                          } else {
-                            showDialog(
-                                context: context,
-                                barrierDismissible: false,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      '비밀번호가 다릅니다!',
-                                      style: TextStyle(
-                                        fontFamily: "Gosan",
-                                        fontSize: 24.0,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    content: SingleChildScrollView(
-                                      child: ListBody(children: <Widget>[
-                                        Text(
-                                          '비밀번호를 다시 확인해주세요!',
-                                          style: TextStyle(
-                                            fontFamily: "Gosan",
-                                            fontSize: 18.0,
-                                            color: Colors.black87,
-                                          ),
-                                        ),
-                                      ]),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('예'),
-                                      ),
-                                    ],
-                                  );
-                                });
                           }
                         },
                         child: const Text(
-                          '다음',
+                          '회원 가입하기',
                           style: TextStyle(
                             fontFamily: "Gosan",
                             fontSize: 28.0,

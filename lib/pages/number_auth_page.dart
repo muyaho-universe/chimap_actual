@@ -59,6 +59,13 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
         print("auth정보삭제");
         _auth.signOut();
         print("phone로그인된것 로그아웃");
+        await Fluttertoast.showToast(
+            msg: '인증 완료!',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Colors.greenAccent,
+            fontSize: 16.0
+        );
       }
 
     } on FirebaseAuthException catch (e) {
