@@ -11,7 +11,7 @@ import '../utils/user_info.dart';
 
 
 class LocationSearchPage extends StatefulWidget {
-  LocationSearchPage( {Key? key}) : super(key: key);
+  const LocationSearchPage( {Key? key}) : super(key: key);
 
   @override
   _LocationSearchPageState createState() => _LocationSearchPageState();

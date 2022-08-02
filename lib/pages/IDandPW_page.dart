@@ -19,8 +19,8 @@ class IDandPWPage extends StatefulWidget {
 class _IDandPWPageState extends State<IDandPWPage> {
   final _IPsignUpFormKey = GlobalKey<FormState>();
   final userLoginController = Get.put(UserLoginController());
-
   UInfo info = Get.arguments;
+
   late String address = info.address;
   bool go = true;
   late Reference firebaseStorageRef;
@@ -31,7 +31,8 @@ class _IDandPWPageState extends State<IDandPWPage> {
   String _message = "";
   String _passwordLength = "";
   String _passwordCheck = "";
-
+  String firstPassword = "";
+  String secondPassword = "";
 
   bool _longPassword = false;
 
@@ -140,6 +141,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       width: 200,
                       height: 60,
                       child: TextFormField(
+                        // controller: _signUpIDController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: '아이디를 입력해주세요.',
@@ -148,9 +150,8 @@ class _IDandPWPageState extends State<IDandPWPage> {
                         onChanged: (value) {
                           setState(() {
                             _isIDEmpty = false;
-                            id =  value as String;
+                            id = value as String;
                             info.setID(id);
-
                           });
                         },
                         initialValue: info.id,
@@ -226,7 +227,6 @@ class _IDandPWPageState extends State<IDandPWPage> {
                   width: 300,
                   height: 60,
                   child: TextFormField(
-
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: '비밀번호를 입력해주세요.',
@@ -239,11 +239,12 @@ class _IDandPWPageState extends State<IDandPWPage> {
                             _longPassword = false;
                           } else {
                             _longPassword = true;
+                            firstPassword = value as String;
                             _passwordLength = "사용할 수 있습니다.";
-                            if (!_signUpPWConfirmController.text.isEmpty) {
-                              if (value == _signUpPWConfirmController.text) {
+                            if (!firstPassword.isEmpty) {
+                              if (value == secondPassword) {
                                 _passwordCheck = "비밀번호가 일치합니다!";
-                                info.setPassword(_signUpPWConfirmController.text);
+                                info.setPassword(firstPassword);
                               } else {
                                 _passwordCheck = "비밀번호가 일치하지 않습니다.";
                               }
@@ -256,6 +257,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                         }
                       });
                     },
+                    initialValue: info.password,
                   ),
                 ),
                 SizedBox(
@@ -297,7 +299,6 @@ class _IDandPWPageState extends State<IDandPWPage> {
                   width: 300,
                   height: 60,
                   child: TextFormField(
-                    controller: _signUpPWConfirmController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: '비밀번호를 다시 한번 입력해주세요.',
@@ -305,9 +306,9 @@ class _IDandPWPageState extends State<IDandPWPage> {
                     onChanged: (value) {
                       setState(() {
                         if (!value.isEmpty) {
-                          if (value == _signUpPWController.text) {
+                          if (value == firstPassword) {
                             _passwordCheck = "비밀번호가 일치합니다!";
-                            info.setPassword(_signUpPWConfirmController.text);
+                            info.setPassword(firstPassword);
                           } else {
                             _passwordCheck = "비밀번호가 일치하지 않습니다.";
                           }
@@ -317,6 +318,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       });
                     },
                     readOnly: _longPassword ? false : true,
+                    initialValue: info.password,
                   ),
                 ),
                 SizedBox(
@@ -473,13 +475,10 @@ class _IDandPWPageState extends State<IDandPWPage> {
                           primary: Color(0xFFFFBD9D),
                         ),
                         onPressed: () {
-                          if (_signUpPWController.text ==
-                              _signUpPWConfirmController.text) {
-                            if (info.userType == 1) {
-                              Get.offNamed('/first/login/signup/partnerOnly');
-                            } else {
-                              Get.offNamed("/first/login/signup/complete");
-                            }
+                          if (info.userType == 1) {
+                            Get.offNamed('/first/login/signup/partnerOnly');
+                          } else {
+                            Get.offNamed("/first/login/signup/complete");
                           }
                         },
                         child: const Text(
