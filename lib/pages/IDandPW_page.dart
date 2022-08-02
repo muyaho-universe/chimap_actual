@@ -20,10 +20,6 @@ class _IDandPWPageState extends State<IDandPWPage> {
   final _IPsignUpFormKey = GlobalKey<FormState>();
   final userLoginController = Get.put(UserLoginController());
 
-  final TextEditingController _signUpIDController = TextEditingController();
-  final TextEditingController _signUpPWController = TextEditingController();
-  final TextEditingController _signUpPWConfirmController =
-      TextEditingController();
   UInfo info = Get.arguments;
   late String address = info.address;
   bool go = true;
@@ -35,6 +31,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
   String _message = "";
   String _passwordLength = "";
   String _passwordCheck = "";
+
 
   bool _longPassword = false;
 
@@ -143,19 +140,20 @@ class _IDandPWPageState extends State<IDandPWPage> {
                       width: 200,
                       height: 60,
                       child: TextFormField(
-                        controller: _signUpIDController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: '아이디를 입력해주세요.',
                         ),
-                        // initialValue: _isIDEmpty ? null : info.id,
+
                         onChanged: (value) {
                           setState(() {
                             _isIDEmpty = false;
-                            id = _signUpIDController.text;
+                            id =  value as String;
                             info.setID(id);
+
                           });
                         },
+                        initialValue: info.id,
                       ),
                     ),
                     SizedBox(
@@ -171,7 +169,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                           String _temp = "";
                           for (i = 0; i < querySnapshot.docs.length; i++) {
                             var a = querySnapshot.docs[i];
-                            if (a.get('uid') == _signUpIDController.text) {
+                            if (a.get('uid') == info.id) {
                               _isIDCheked = 1;
                               _temp = "존재합니다";
                               print("존재합니다");
@@ -228,7 +226,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
                   width: 300,
                   height: 60,
                   child: TextFormField(
-                    controller: _signUpPWController,
+
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: '비밀번호를 입력해주세요.',

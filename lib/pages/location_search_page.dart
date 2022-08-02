@@ -11,13 +11,14 @@ import '../utils/user_info.dart';
 
 
 class LocationSearchPage extends StatefulWidget {
-  const LocationSearchPage({Key? key}) : super(key: key);
+  LocationSearchPage( {Key? key}) : super(key: key);
 
   @override
   _LocationSearchPageState createState() => _LocationSearchPageState();
 }
 
 class _LocationSearchPageState extends State<LocationSearchPage> {
+
   final searchTec = TextEditingController();
   final scrollController = ScrollController();
   final addressBloc = AddressBloc();
@@ -250,6 +251,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
                           color: Colors.black87,
                         ),
                       ),
+                      Text(info.id),
                     ]),
                   ),
                   actions: <Widget>[
