@@ -442,7 +442,8 @@ class _IDandPWPageState extends State<IDandPWPage> {
                         style: ElevatedButton.styleFrom(
                           //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           primary: Color(0xFFC4C4C4),
                         ),
                         onPressed: () {
@@ -475,11 +476,27 @@ class _IDandPWPageState extends State<IDandPWPage> {
                           primary: Color(0xFFFFBD9D),
                         ),
                         onPressed: () {
-                          if (info.userType == 1) {
-                            Get.offNamed('/first/login/signup/partnerOnly');
-                          } else {
+                          CollectionReference user =
+                          FirebaseFirestore.instance.collection('user');
+
+
+                          user.add({
+                            //Mail(
+                            'id': info.id,
+                            'password': info.password,
+                            'name': info.userName,
+                            'phone': info.userPhoneNum,
+                            'birthday': info.birthDay,
+                            'gender': info.gender,
+                            'address': info.address,
+                            'auth': info.auth,
+                            'type': info.userType,
+                          });
+                          // if (info.userType == 1) {
+                          //   Get.offNamed('/first/login/signup/partnerOnly');
+                          // } else {
                             Get.offNamed("/first/login/signup/complete");
-                          }
+                          // }
                         },
                         child: const Text(
                           '회원 가입하기',
