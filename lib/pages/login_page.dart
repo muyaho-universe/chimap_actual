@@ -250,8 +250,9 @@ class LoginPage extends StatelessWidget {
             loginController.loging();
             Get.toNamed('/first/login/timesetPage1');
           }
-          else{
+          else {
             loginController.notLoging();
+            print("not existed");
           }
         }
       }

@@ -8,22 +8,19 @@ import 'package:chimap_actual/repository/location_search.dart';
 
 import '../utils/user_info.dart';
 
-
-
 class LocationSearchPage extends StatefulWidget {
-  const LocationSearchPage( {Key? key}) : super(key: key);
+  const LocationSearchPage({Key? key}) : super(key: key);
 
   @override
   _LocationSearchPageState createState() => _LocationSearchPageState();
 }
 
 class _LocationSearchPageState extends State<LocationSearchPage> {
-
   final searchTec = TextEditingController();
   final scrollController = ScrollController();
   final addressBloc = AddressBloc();
   List<Juso> addressList = [];
-  late String keyword="", errorMessage = "검색어를 입력하세요.";
+  late String keyword = "", errorMessage = "검색어를 입력하세요.";
   late int page;
   late String ADD;
   UInfo info = Get.arguments;
@@ -40,7 +37,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
 
   addAddressStreamListener() {
     addressBloc.address.listen(
-          (list) {
+      (list) {
         addressList = list;
         setState(() {});
       },
@@ -59,11 +56,13 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
       },
     );
   }
+
   addScrollListener() {
     scrollController.addListener(() {
       FocusScope.of(context).requestFocus(new FocusNode());
     });
   }
+
   addTextEditListener() {
     searchTec.addListener(() async {
       if (keyword == searchTec.text) return;
@@ -71,7 +70,6 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
       keyword = searchTec.text;
       page = 1;
       addressBloc.fetchAddress(keyword, page);
-
     });
   }
 
@@ -80,7 +78,6 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
     addressBloc.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +95,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
     );
   }
 
-
   _bodyWidget() {
-
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -114,8 +109,8 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
                 ),
                 Row(
                   children: [
-                    Expanded(child: searchTextField(),flex:10),
-                    SizedBox(width:10),
+                    Expanded(child: searchTextField(), flex: 10),
+                    SizedBox(width: 10),
                   ],
                 ),
                 Expanded(child: listView()),
@@ -127,10 +122,9 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
     );
   }
 
-
   Widget searchTextField() {
     return Container(
-      width:300,
+      width: 300,
       height: 60,
       child: TextField(
         controller: searchTec,
@@ -155,9 +149,10 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
               color: Color(0xFFEdEdEd),
             ),
             Expanded(
-                child: Center(
-                  child: Text(errorMessage),
-                ))
+              child: Center(
+                child: Text(errorMessage),
+              ),
+            )
           ],
         ),
       );
@@ -179,6 +174,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
       },
     );
   }
+
   Widget listItem(Juso address) {
     final roadLast = address.buldSlno == '0' ? '' : '-' + address.buldSlno;
     final rodaTitle = '${address.rn} ${address.buldMnnm}$roadLast';
@@ -189,95 +185,92 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
       alignment: Alignment.centerLeft,
       width: double.infinity,
       child: InkWell(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 5),
-            Text(
-              address.jibunAddr,
-              style: TextStyle(color: Color(0xFFA8A8A8)),
-            ),
-            Text(
-              '[도로명] ' + address.roadAddr,
-              style: TextStyle(color: Color(0xFFA8A8A8)),
-            ),
-          ],
-        ),
-        onTap: () {
-          showDialog(
-              context: context,
-              barrierDismissible:false,
-              builder: (BuildContext context){
-                return AlertDialog(
-
-                  title: Text(
-                    '선택하신 주소가 맞으신가요?',
-                    style: TextStyle(
-                      fontFamily: "Gosan",
-                      fontSize: 24.0,
-                      color: Colors.black,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 5),
+              Text(
+                address.jibunAddr,
+                style: TextStyle(color: Color(0xFFA8A8A8)),
+              ),
+              Text(
+                '[도로명] ' + address.roadAddr,
+                style: TextStyle(color: Color(0xFFA8A8A8)),
+              ),
+            ],
+          ),
+          onTap: () {
+            showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(
+                      '선택하신 주소가 맞으신가요?',
+                      style: TextStyle(
+                        fontFamily: "Gosan",
+                        fontSize: 24.0,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-
-                  content:SingleChildScrollView(
-                    child:ListBody(children:<Widget>[
-                      Row(
-                        children: [
-                          Container(
-                            width: 250,
-                            height:40,
-                            child: Text(
-                              address.roadAddr,
-                              softWrap: true,
-                              style:TextStyle(
-                                fontFamily: "Gosan",
-                                fontSize: 18.0,
-                                color: Color(0xFF6A74CF),
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              Container(
+                                width: 250,
+                                height: 40,
+                                child: Text(
+                                  address.roadAddr,
+                                  softWrap: true,
+                                  style: TextStyle(
+                                    fontFamily: "Gosan",
+                                    fontSize: 18.0,
+                                    color: Color(0xFF6A74CF),
+                                  ),
+                                ),
                               ),
+                            ],
+                          ),
+                          SizedBox(height: 15.0),
+                          Text(
+                            '맞으시면 "예"를 눌러주세요',
+                            style: TextStyle(
+                              fontFamily: "Gosan",
+                              fontSize: 18.0,
+                              color: Colors.black87,
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height:15.0),
-                      Text(
-                        '맞으시면 "예"를 눌러주세요',
-                        style: TextStyle(
-                          fontFamily: "Gosan",
-                          fontSize: 18.0,
-                          color: Colors.black87,
-                        ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('아니오'),
                       ),
-                      Text(info.id),
-                    ]),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('아니오'),
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        setState(() {
-                          info.setAddress(address.roadAddr);
-                          ADD = address.roadAddr;
-                        });
-                        Get.offNamed("/first/login/signup/IDandPW", arguments: info);
-                      },
-                      child: Text('예'),
-                    ),
-                  ],
-                );
-              });
-        }
-      )
-
-      ,
+                      TextButton(
+                        onPressed: () async {
+                          setState(() {
+                            info.setAddress(address.roadAddr);
+                            ADD = address.roadAddr;
+                          });
+                          Get.offNamed("/first/login/signup/IDandPW",
+                              arguments: info);
+                        },
+                        child: Text('예'),
+                      ),
+                    ],
+                  );
+                });
+          }),
     );
   }
 
@@ -287,7 +280,3 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
     addressBloc.fetchAddress(keyword, page);
   }
 }
-
-
-
-

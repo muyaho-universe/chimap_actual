@@ -482,7 +482,7 @@ class _IDandPWPageState extends State<IDandPWPage> {
 
                           user.add({
                             //Mail(
-                            'id': info.id,
+                            'uid': info.id,
                             'password': info.password,
                             'name': info.userName,
                             'phone': info.userPhoneNum,
