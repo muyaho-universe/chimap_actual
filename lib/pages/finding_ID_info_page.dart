@@ -1,3 +1,4 @@
+import 'package:chimap_actual/utils/user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,8 +10,9 @@ class findingIDInfoPage extends StatefulWidget {
 }
 
 class _findingIDInfoPageState extends State<findingIDInfoPage> {
-  String? _ID = '&&&&&&';
-
+  UInfo uInfo = Get.arguments;
+  late String _name = uInfo.userName;
+  late String ment1 = _name + "님의 아이디는\n";
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -48,7 +50,7 @@ class _findingIDInfoPageState extends State<findingIDInfoPage> {
                 height: 100,
               ),
               Text(
-                '***님의 아이디는\n',
+                ment1,
                 style: TextStyle(
                   fontFamily: "Gosan",
                   fontSize: 28.0,
@@ -142,7 +144,7 @@ class _findingIDInfoPageState extends State<findingIDInfoPage> {
                               TextButton(
                                 onPressed: () {
                                   Get.offNamed("/first/login/findingPW",
-                                      arguments: _ID);
+                                      arguments: uInfo);
                                 },
                                 child: Text('예'),
                               ),

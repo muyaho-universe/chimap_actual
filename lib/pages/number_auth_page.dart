@@ -290,9 +290,9 @@ class _NumberAuthPageState extends State<NumberAuthPage> {
                       ),
                       onPressed:authOk? () {
                         if (_info.userType == 100) {
-                          Get.offNamed("/first/login/findingIDinfo");
+                          Get.offNamed("/first/login/findingIDinfo", arguments: _info);
                         } else if (_info.userType == 101) {
-                          Get.offNamed("/first/login/resetPW");
+                          Get.offNamed("/first/login/resetPW", arguments: _info);
                         } else {
                           _info.setAuth(authOk);
                           Get.offNamed("first/login/signup/IDandPW",

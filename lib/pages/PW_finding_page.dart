@@ -1,4 +1,5 @@
 import 'package:chimap_actual/utils/user_controller.dart';
+import 'package:chimap_actual/utils/user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -25,8 +26,8 @@ class _IDFindingPageState extends State<PWFindingPage> {
   late String _name = _findingNameController.text;
   late String _num = _findingNumberController.text;
   late String _ID = _findingIDController.text;
-  var type = 101;
 
+  UInfo uInfo = new UInfo();
 
   @override
   Widget build(BuildContext context) {
@@ -286,12 +287,6 @@ class _IDFindingPageState extends State<PWFindingPage> {
                       _name = _findingNameController.text;
                       _num = _findingNumberController.text;
                       _ID = _findingIDController.text;
-                      // if(foundID!.isBlank){
-                      //   _ID=foundID;
-                      // }
-                      // else{
-                      //   _ID = _findingIDController.text;
-                      // }
                       showDialog(
                           context: context,
                           barrierDismissible: false,
@@ -405,7 +400,11 @@ class _IDFindingPageState extends State<PWFindingPage> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Get.offNamed("/first/login/signup/numberAuth", arguments: type);
+                                    uInfo.setID(_ID);
+                                    uInfo.setPhoneNumber(_num);
+                                    uInfo.setUserName(_name);
+                                    uInfo.setType(101);
+                                    Get.offNamed("/first/login/signup/numberAuth", arguments: uInfo);
                                   },
                                   child: Text('예'),
                                 ),
