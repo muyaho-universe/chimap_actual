@@ -12,7 +12,9 @@ class findingIDInfoPage extends StatefulWidget {
 class _findingIDInfoPageState extends State<findingIDInfoPage> {
   UInfo uInfo = Get.arguments;
   late String _name = uInfo.userName;
+  late String _id = uInfo.id;
   late String ment1 = _name + "님의 아이디는\n";
+  late String ment2 = _id + "\n";
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -58,7 +60,7 @@ class _findingIDInfoPageState extends State<findingIDInfoPage> {
                 ),
               ),
               Text(
-                '&&&&&\n',
+                ment2,
                 style: TextStyle(
                   fontFamily: "Gosan",
                   fontSize: 28.0,

@@ -1,3 +1,4 @@
+import 'package:chimap_actual/pages/information_finding_page.dart';
 import 'package:chimap_actual/pages/location_search_page.dart';
 import 'package:chimap_actual/pages/number_auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -152,6 +153,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/testInitPage/resultChimae',
           page: () => ResultChimaePage(),
+        ),
+        GetPage(
+          name: '/informationCheck',
+          page: () => InfomationCheck(),
         ),
       ],
     );
