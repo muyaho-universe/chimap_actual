@@ -4,65 +4,43 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class InfomationCheck extends StatelessWidget {
-  InfomationCheck({Key? key}) : super(key: key);
-  UInfo uInfo = Get.arguments;
+class InfomationCheck extends StatefulWidget {
+  const InfomationCheck({Key? key}) : super(key: key);
 
-  CollectionReference database = FirebaseFirestore.instance.collection('user');
-  late QuerySnapshot querySnapshot;
-  int i = 0;
-  bool find = false;
+  @override
+  State<InfomationCheck> createState() => _InfomationCheckState();
+}
+
+class _InfomationCheckState extends State<InfomationCheck> {
+  UInfo uInfo = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        querySnapshot = await database.get();
-        for (i = 0; i < querySnapshot.docs.length; i++) {
-          var a = querySnapshot.docs[i];
-          if(!uInfo.id.isEmpty){
-            if (a.get('name') ==  uInfo.userName && a.get('phone') ==  uInfo.userPhoneNum
-                && a.get('uid') ==  uInfo.id) {
-              String password = a.get('password');
-
-              uInfo.setPassword(password);
-              Get.offNamed("/first/login/findingIDinfo", arguments: uInfo);
-              find = true;
-            }
-          }
-          else{
-            if (a.get('name') ==  uInfo.userName && a.get('phone') ==  uInfo.userPhoneNum ) {
-              String id = a.get('uid');
-
-              uInfo.setID(id);
-              Get.offNamed("/first/login/findingIDinfo", arguments: uInfo);
-              find = true;
-            }
-          }
-
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('mail').snapshots(),
+      builder: (BuildContext context,
+          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(), //로딩되는 동그라미 보여주기
+          );
         }
-        if(!find){
-          Get.offNamed('/first/login', arguments: uInfo);
+        if (snapshot.hasData) {
+          for (int i = 0; i < snapshot.data!.docs.length; i++) {
+            var one = snapshot.data!.docs[i];
+            if(!uInfo.id.isEmpty){
+              if(one.get('name')){
+
+              }
+            }
+
+          }
         }
+
+        return Center(
+          child: CircularProgressIndicator(), //로딩되는 동그라미 보여주기
+        );
       },
-      child: Scaffold(
-        backgroundColor: const Color(0xFFFFCAB0),
-        body: _bodyWidget(),
-      ),
-
-
-    );
-  }
-
-  _bodyWidget() {
-    return Center(
-      child: SizedBox(
-        width: 200,
-        height: 200,
-        child: const CircularProgressIndicator(
-          color: Colors.black,
-        ),
-      ),
     );
   }
 }
